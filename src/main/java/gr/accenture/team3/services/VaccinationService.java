@@ -8,18 +8,29 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class VaccinationService {
-    @Autowired
-    Insured insured;
-    @Autowired
-    Vaccination vaccination;
-   public Vaccination getVaccinationStatus(String amka){
+   @Autowired
+    InsuredService insuredService;
+    List<Vaccination> vaccinations=new ArrayList<>();
+    public List<Vaccination> addVaccination(Vaccination vaccination) {
+        vaccinations.add(vaccination);
+        return vaccinations;
+    }
+    public List<Vaccination> getVaccinations(){
+        return vaccinations;
+    }
 
-           if (insured.getAmka().equals(amka)){
-               return vaccination;
-           }
-       throw new ResponseStatusException(HttpStatus.NOT_FOUND,
-               "This amka doesn't belong to anyone!");
+    public Vaccination getVaccinationStatus(String amka){
+        for(Vaccination vaccination: vaccinations){
+            if(vaccination.getInsured().equals(insuredService.getInsuredByAmka(amka))){
+                return vaccination;
+            }
+        }
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                "This insured is not vaccinated!");
     }
 }

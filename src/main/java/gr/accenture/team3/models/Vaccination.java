@@ -12,6 +12,9 @@ public class Vaccination {
         this.vaccinationDate = vaccinationDate;
         this.expirationDate = expirationDate;
     }
+    public Vaccination(Insured insured){
+        this.insured = insured;
+    }
 
     public Insured getInsured() {
         return insured;

@@ -1,9 +1,18 @@
 package gr.accenture.team3.controllers;
 
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.WriterException;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
 import gr.accenture.team3.models.Vaccination;
 import gr.accenture.team3.services.VaccinationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/vaccination")
@@ -11,8 +20,28 @@ public class VaccinationController {
 
     @Autowired
     VaccinationService vaccinationService;
-    @GetMapping
+    @PostMapping("/add")
+    public List<Vaccination> addVaccination(@RequestBody Vaccination vaccination) {
+
+        return vaccinationService.addVaccination(vaccination);
+    }
+    @GetMapping("/all")
+    public List<Vaccination> getVaccinations(){
+        return vaccinationService.getVaccinations();
+    }
+
+    @GetMapping("/status")
     public Vaccination getVaccinationStatus(@RequestParam String amka){
         return vaccinationService.getVaccinationStatus(amka);
+    }
+    @GetMapping("/QR")
+    public static byte[] generateQRCodeImage(String text, int width, int height) throws WriterException, IOException {
+        QRCodeWriter qrCodeWriter = new QRCodeWriter();
+        BitMatrix bitMatrix = qrCodeWriter.encode(text, BarcodeFormat.QR_CODE, width, height);
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        MatrixToImageWriter.writeToStream(bitMatrix, "PNG", outputStream);
+
+        return outputStream.toByteArray();
     }
 }
