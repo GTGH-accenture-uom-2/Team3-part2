@@ -27,8 +27,8 @@ public class InsuredController {
     }
 
     @GetMapping("/all")
-    public List<Insured> getInsured() {
-        return insuredService.getInsured();
+    public List<Insured> getInsureds() {
+        return insuredService.getInsureds();
     }
 
 

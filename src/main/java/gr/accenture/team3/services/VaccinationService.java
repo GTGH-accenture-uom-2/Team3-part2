@@ -13,16 +13,23 @@ import java.util.List;
 
 @Service
 public class VaccinationService {
-   @Autowired
+    @Autowired
     InsuredService insuredService;
-    List<Vaccination> vaccinations=new ArrayList<>();
+    List<Vaccination> vaccinations = new ArrayList<>();
+
     public List<Vaccination> addVaccination(Vaccination vaccination) {
         vaccinations.add(vaccination);
         return vaccinations;
     }
-    public List<Vaccination> getVaccinations(){
+
+    public List<Vaccination> getVaccinations() {
         return vaccinations;
     }
+//    public List<Vaccination> addVaccinations(List<Insured> insureds,){ //kanonika edw thelei Reservation kai na pairnei orismata apo ekei
+//    for(Insured ins: insureds){
+//        vaccinations.add(new Vaccination(insureds(ins),))
+//    }
+// }
 
     public Vaccination getVaccinationStatus(String amka){
         for(Vaccination vaccination: vaccinations){

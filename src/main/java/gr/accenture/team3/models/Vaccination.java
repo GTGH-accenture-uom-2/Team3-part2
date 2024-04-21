@@ -6,7 +6,7 @@ public class Vaccination {
     private String vaccinationDate;
     private String expirationDate;
 
-    public Vaccination(Insured insured, Doctor doctor, String vaccinationDate, String expirationDate) {
+    public Vaccination(Insured insured, Doctor doctor, String vaccinationDate, String expirationDate) {  //mporoume na kanoume extend reservation
         this.insured = insured;
         this.doctor = doctor;
         this.vaccinationDate = vaccinationDate;

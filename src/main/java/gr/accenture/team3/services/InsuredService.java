@@ -18,9 +18,10 @@ public class InsuredService {
         insureds.add(insured);
         return insureds;
     }
-    public List<Insured> getInsured() {
+    public List<Insured> getInsureds() {
         return insureds;
     }
+
     public Insured getInsuredByAmka(String amka){
         for(Insured insured: insureds){
             if(insured.getAmka().equals(amka)){
