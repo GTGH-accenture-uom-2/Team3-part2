@@ -11,7 +11,8 @@ public class Timeslot {
     private Doctor doctor;
 
 
-    public Timeslot(LocalDate date, LocalTime startTime, LocalTime endTime, Doctor doctor) {
+    public Timeslot(Long id,LocalDate date, LocalTime startTime, LocalTime endTime, Doctor doctor) {
+        this.id = id;
         this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
