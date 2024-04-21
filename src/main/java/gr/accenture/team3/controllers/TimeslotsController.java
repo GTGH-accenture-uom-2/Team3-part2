@@ -10,7 +10,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/student")
+@RequestMapping("/timeslot")
 public class TimeslotsController {
     @Autowired
     TimeslotService timeslotService;
