@@ -7,6 +7,7 @@ public class Insured {
     private String surname;
     private String birthday;
     private String email;
+    private int changeReservationsCounter;
 
     public Insured(String afm, String amka, String name, String surname, String birthday, String email) {
         this.afm = afm;
@@ -15,7 +16,11 @@ public class Insured {
         this.surname = surname;
         this.birthday = birthday;
         this.email = email;
+        changeReservationsCounter=0;
     }
+
+    public void increaseChangeReservationCounter(){ changeReservationsCounter++;}
+    public int getChangeReservationsCounter(){ return changeReservationsCounter;}
 
     public String getAfm() {
         return afm;

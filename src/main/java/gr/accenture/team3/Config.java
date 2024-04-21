@@ -24,8 +24,10 @@ public class Config {
         return args -> {
            insuredService.addInsured(
                     new Insured("123456789","12345678901","Nikos","Nikolaidis","12-34-90","example@example.gr"));
-           reservationService.addReservation(
-                    new Reservation(insuredService.getInsureds().get(0),null, LocalDate.of(2021,02,10)));
+            insuredService.addInsured(
+                    new Insured("123456789","03069701567","Vaso","Karouta","03-06-97","example@example.gr"));
+//           reservationService.addReservation(
+//                    new Reservation(insuredService.getInsureds().get(0),null, LocalDate.of(2021,02,10)));
            vaccinationService.addVaccination(
                     new Vaccination(insuredService.getInsureds().get(0),null,null, LocalDate.of(2021,02,10)));
            doctorService.addDoctor(
