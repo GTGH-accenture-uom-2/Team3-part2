@@ -1,8 +1,6 @@
 package gr.accenture.team3.controllers;
 
-import gr.accenture.team3.models.Insured;
-import gr.accenture.team3.models.Reservation;
-import gr.accenture.team3.models.VaccinationCenter;
+import gr.accenture.team3.models.*;
 import gr.accenture.team3.services.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -23,4 +21,12 @@ public class ReservationController {
     public List<Reservation> getReservation(){
         return reservationService.getReservations();
     }
+
+    @PostMapping("/createReservation")
+    public Reservation createAReservation(@RequestParam String amka, @RequestParam Long idTimeslot, @RequestParam String surname){
+        return reservationService.addNewReservation(amka,idTimeslot,surname);
+    }
+    @GetMapping("/createReservation")
+    public Reservation getNewReservation(@RequestParam String amka){ return reservationService.getAReservation(amka);}
+
 }
