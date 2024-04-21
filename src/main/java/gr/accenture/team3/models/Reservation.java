@@ -5,12 +5,12 @@ import java.time.LocalDate;
 public class Reservation {
     private Insured insured;
     private Timeslot timeslot;
-    private LocalDate localdate;
+    private LocalDate vaccinationDate;
 
-    public Reservation(Insured insured, Timeslot timeslot, LocalDate localdate) {
+    public Reservation(Insured insured, Timeslot timeslot, LocalDate vaccinationDate) {
         this.insured = insured;
         this.timeslot = timeslot;
-        this.localdate = localdate;
+        this.vaccinationDate = vaccinationDate;
     }
 
     public Insured getInsured() {
@@ -29,11 +29,11 @@ public class Reservation {
         this.timeslot = timeslot;
     }
 
-    public LocalDate getLocaldate() {
-        return localdate;
+    public LocalDate getVaccinationDate() {
+        return vaccinationDate;
     }
 
-    public void setLocaldate(LocalDate localdate) {
-        this.localdate = localdate;
+    public void setVaccinationDate(LocalDate vaccinationDate) {
+        this.vaccinationDate = vaccinationDate;
     }
 }
