@@ -24,22 +24,22 @@ public class DoctorService {
         return doctors;
     }
 
-    public boolean isIdPresentInInsured(String amka) {
-        //List<Insured> insuredList = reservationService.getAllInsured();
-        for (Insured insured : reservationService.getAllInsured()) {
-            if (insured.getAmka() == amka) {
-                return true;
-            }
-        }
-        return false;
-    }
-    public Long insertTimeslotId(Long id){
-        for (Timeslot t: reservationService.getAllTimeslots()){
-            if (t.getId()==id){
-                return id;
-            }
-        }
-        return null;
-    }
+//    public boolean isIdPresentInInsured(String amka) {
+//        //List<Insured> insuredList = reservationService.getAllInsured();
+//        for (Insured insured : reservationService.getAllInsured()) {
+//            if (insured.getAmka() == amka) {
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
+//    public Long insertTimeslotId(Long id){
+//        for (Timeslot t: reservationService.getAllTimeslots()){
+//            if (t.getId()==id){
+//                return id;
+//            }
+//        }
+//        return null;
+//    }
 }
 
