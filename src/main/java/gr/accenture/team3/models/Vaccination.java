@@ -1,19 +1,18 @@
 package gr.accenture.team3.models;
 
-public class Vaccination {
+import java.time.LocalDate;
+
+public class Vaccination  extends Reservation{
     private Insured insured;
     private Doctor doctor;
-    private String vaccinationDate;
-    private String expirationDate;
+    private LocalDate vaccinationDate;
+    private LocalDate expirationDate;
 
-    public Vaccination(Insured insured, Doctor doctor, String vaccinationDate, String expirationDate) {  //mporoume na kanoume extend reservation
-        this.insured = insured;
+    public Vaccination (Insured insured, Doctor doctor, Timeslot timeslot, LocalDate localdate) {
+        super(insured,timeslot,localdate);  //mporoume na kanoume extend reservation
         this.doctor = doctor;
-        this.vaccinationDate = vaccinationDate;
-        this.expirationDate = expirationDate;
-    }
-    public Vaccination(Insured insured){
-        this.insured = insured;
+        vaccinationDate =localdate;
+        expirationDate = localdate.plusYears(2);
     }
 
     public Insured getInsured() {
@@ -32,19 +31,19 @@ public class Vaccination {
         this.doctor = doctor;
     }
 
-    public String getVaccinationDate() {
+    public LocalDate getVaccinationDate() {
         return vaccinationDate;
     }
 
-    public void setVaccinationDate(String vaccinationDate) {
+    public void setVaccinationDate(LocalDate vaccinationDate) {
         this.vaccinationDate = vaccinationDate;
     }
 
-    public String getExpirationDate() {
+    public LocalDate getExpirationDate() {
         return expirationDate;
     }
 
-    public void setExpirationDate(String expirationDate) {
+    public void setExpirationDate(LocalDate expirationDate) {
         this.expirationDate = expirationDate;
     }
 }
