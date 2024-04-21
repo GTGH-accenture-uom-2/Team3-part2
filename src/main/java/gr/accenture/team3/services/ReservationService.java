@@ -15,5 +15,8 @@ public class ReservationService {
        reservations.add(reservation);
        return reservations;
     }
+    public List<Reservation> getReservations(){
+        return reservations;
+    }
 
 }
