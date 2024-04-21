@@ -21,4 +21,13 @@ public class DoctorController {
     public List<Doctor> addDoctor(@RequestBody Doctor doctor){
         return doctorService.addDoctor(doctor);
     }
+
+    @PutMapping
+    public Long TimeslotId(@RequestParam Long id){
+        return doctorService.insertTimeslotId(id);
+    }
+
+
+
+
 }

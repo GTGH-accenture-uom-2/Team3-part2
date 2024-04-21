@@ -34,6 +34,7 @@ public class VaccinationController {
     public Vaccination getVaccinationStatus(@RequestParam String amka){
         return vaccinationService.getVaccinationStatus(amka);
     }
+
     @GetMapping("/QR")
     public static byte[] generateQRCodeImage(String text, int width, int height) throws WriterException, IOException {
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
