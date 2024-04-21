@@ -24,6 +24,10 @@ public class TimeslotService {
         return timeslots;
     }
 
+    public Timeslot findTimeSlotByID(Long id){
+        return timeslots.stream().filter(timeslot -> timeslot.getId().equals(id)).findFirst().orElse(null);
+    }
+
     public void generateTimeslotsForPeriod(LocalDate startDate, int days) {
         DateTimeFormatter idFormatter = DateTimeFormatter.ofPattern("ddMMyy");
         LocalDate date = startDate;

@@ -23,4 +23,9 @@ public class ReservationController {
     public List<Reservation> getReservation(){
         return reservationService.getReservations();
     }
+
+    @GetMapping("/today")
+    public List<Reservation> getTodayReservations(@RequestParam(defaultValue = "0") int page,@RequestParam(defaultValue = "2") int size) {
+        return reservationService.getTodayReservations(page, size);
+    }
 }

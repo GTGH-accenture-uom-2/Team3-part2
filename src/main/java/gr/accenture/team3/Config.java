@@ -23,18 +23,26 @@ public class Config {
              TimeslotService timeslotService){
         return args -> {
            insuredService.addInsured(
-                    new Insured("123456789","12345678901","Nikos","Nikolaidis","12-34-90","example@example.gr"));
+                    new Insured("123456789","12345678901","Leonidas","Nikolaidis","12-34-90","example@example.gr"));
+           insuredService.addInsured(
+                    new Insured("123456789","12345678901","Vasiliki","Nikolaidis","12-34-90","example@example.gr"));
+           insuredService.addInsured(
+                    new Insured("123456789","12345678901","Kiki","Nikolaidis","12-34-90","example@example.gr"));
+           insuredService.addInsured(
+                    new Insured("123456789","12345678901","Vaso","Nikolaidis","12-34-90","example@example.gr"));
            reservationService.addReservation(
-                    new Reservation(insuredService.getInsureds().get(0),null, LocalDate.of(2021,02,10)));
-           vaccinationService.addVaccination(
-                    new Vaccination(insuredService.getInsureds().get(0),null,null, LocalDate.of(2021,02,10)));
+                    new Reservation(insuredService.getInsureds().get(0),null, LocalDate.of(2024,06,10)));
+           reservationService.addReservation(
+                    new Reservation(insuredService.getInsureds().get(1),null, LocalDate.of(2024,04,21)));
+           reservationService.addReservation(
+                    new Reservation(insuredService.getInsureds().get(2),null, LocalDate.of(2024,04,21)));
+           reservationService.addReservation(
+                    new Reservation(insuredService.getInsureds().get(3),null, LocalDate.of(2024,04,21)));
            doctorService.addDoctor(
                     new Doctor("27059500515", "Leonidas", "Bozatzidis", LocalDate.of(1996, 10, 15)));
            LocalDate today = LocalDate.now();
            timeslotService.generateTimeslotsForPeriod(today, 30);
         };
-
-
     };
 
 
