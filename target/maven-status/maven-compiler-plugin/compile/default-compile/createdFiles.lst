@@ -1,0 +1,11 @@
+gr\accenture\team3\controllers\InsuredController.class
+gr\accenture\team3\models\Timeslot.class
+gr\accenture\team3\models\VaccinationCenter.class
+gr\accenture\team3\Team3Application.class
+gr\accenture\team3\models\Doctor.class
+gr\accenture\team3\models\Vaccination.class
+gr\accenture\team3\models\Insured.class
+gr\accenture\team3\controllers\VaccinationController.class
+gr\accenture\team3\models\Reservation.class
+gr\accenture\team3\services\InsuredService.class
+gr\accenture\team3\services\VaccinationService.class

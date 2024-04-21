@@ -1,25 +1,25 @@
 package gr.accenture.team3.models;
 
-public class Vaccination {
-    private Insured insured;
+import java.time.LocalDate;
+
+public class Vaccination  extends Reservation{
+
     private Doctor doctor;
-    private String vaccinationDate;
-    private String expirationDate;
+    private LocalDate expirationDate;
 
-    public Vaccination(Insured insured, Doctor doctor, String vaccinationDate, String expirationDate) {
-        this.insured = insured;
+    public Vaccination (Insured insured, Doctor doctor, Timeslot timeslot, LocalDate vaccinationDate) {
+        super(insured,timeslot,vaccinationDate);  //mporoume na kanoume extend reservation
         this.doctor = doctor;
-        this.vaccinationDate = vaccinationDate;
-        this.expirationDate = expirationDate;
+        expirationDate = vaccinationDate.plusYears(2);
     }
 
-    public Insured getInsured() {
-        return insured;
-    }
-
-    public void setInsured(Insured insured) {
-        this.insured = insured;
-    }
+//    public Insured getInsured() {
+//        return insured;
+//    }
+//
+//    public void setInsured(Insured insured) {
+//        this.insured = insured;
+//    }
 
     public Doctor getDoctor() {
         return doctor;
@@ -29,19 +29,19 @@ public class Vaccination {
         this.doctor = doctor;
     }
 
-    public String getVaccinationDate() {
-        return vaccinationDate;
-    }
+//    public LocalDate getVaccinationDate() {
+//        return vaccinationDate;
+//    }
+//
+//    public void setVaccinationDate(LocalDate vaccinationDate) {
+//        this.vaccinationDate = vaccinationDate;
+//    }
 
-    public void setVaccinationDate(String vaccinationDate) {
-        this.vaccinationDate = vaccinationDate;
-    }
-
-    public String getExpirationDate() {
+    public LocalDate getExpirationDate() {
         return expirationDate;
     }
 
-    public void setExpirationDate(String expirationDate) {
+    public void setExpirationDate(LocalDate expirationDate) {
         this.expirationDate = expirationDate;
     }
 }
