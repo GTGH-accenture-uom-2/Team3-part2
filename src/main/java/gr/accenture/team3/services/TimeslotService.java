@@ -1,7 +1,9 @@
 package gr.accenture.team3.services;
 
 import gr.accenture.team3.models.Timeslot;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -16,12 +18,22 @@ public class TimeslotService {
     List<Timeslot> timeslots = new ArrayList<>();
 
     public List<Timeslot> getAllTimeslots() {
-        return new ArrayList<>(timeslots);
+        return timeslots;
     }
 
     public List<Timeslot> addTimeslot(Timeslot timeslot) {
         timeslots.add(timeslot);
         return timeslots;
+    }
+    public List<Timeslot> getTimeslotByDate(LocalDate localdate){
+        List<Timeslot> timeslotsByDate=new ArrayList<>();
+        for(Timeslot timeslot: timeslots){
+            if(timeslot.getDate().equals(localdate)){
+                return timeslotsByDate;
+            }
+        }
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                "There are no timeslot!");
     }
 
     public void generateTimeslotsForPeriod(LocalDate startDate, int days) {

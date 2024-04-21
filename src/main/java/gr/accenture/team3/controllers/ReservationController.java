@@ -2,9 +2,14 @@ package gr.accenture.team3.controllers;
 
 import gr.accenture.team3.models.*;
 import gr.accenture.team3.services.ReservationService;
+import gr.accenture.team3.services.TimeslotService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -12,6 +17,8 @@ import java.util.List;
 public class ReservationController {
     @Autowired
     ReservationService reservationService;
+    @Autowired
+    TimeslotService timeslotService;
 
     @PostMapping("/add")
    public List<Reservation> addReservation(@RequestBody  Reservation reservation){
@@ -20,6 +27,11 @@ public class ReservationController {
    @GetMapping("/all")
     public List<Reservation> getReservation(){
         return reservationService.getReservations();
+    }
+    @GetMapping("/searchTimeslots")
+    public List<Timeslot> getAvailableTimeslot(@RequestParam LocalDate localDate){
+
+        return reservationService.availableTimeslot(localDate);
     }
 
     @PostMapping("/createReservation")

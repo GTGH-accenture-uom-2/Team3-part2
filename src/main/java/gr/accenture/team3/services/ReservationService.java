@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +26,22 @@ public class ReservationService {
     }
     public List<Reservation> getReservations(){
         return reservations;
+    }
+    public List<Timeslot> availableTimeslot(LocalDate localDate){
+
+        List<Timeslot> availableTimeslots=new ArrayList<>();
+        List<Timeslot> timeslotsByDate=timeslotService.getTimeslotByDate(localDate);
+        for(Reservation reservation: reservations){
+            for(Timeslot timeslot: timeslotsByDate){
+
+                if(!reservation.getTimeslot().equals(timeslot)){
+                availableTimeslots.add(timeslot);
+                }
+                return availableTimeslots;
+            }
+        }
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                "No available timeslot on this date!");
     }
 
     public Reservation addNewReservation(String amka, Long id, String surname){
