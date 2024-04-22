@@ -11,16 +11,12 @@ public class Doctor {
     private String name;
     private String surname;
     private LocalDate birthDate;
-    private List<Timeslot> timeSlots;
-    private List<Vaccination> vaccinations;
 
     public Doctor(String amka,String name,String surname,LocalDate birthDate){
         this.amka = amka;
         this.name = name;
         this.surname = surname;
         this.birthDate=birthDate;
-//        this.timeSlots = new ArrayList<>();
-//        vaccinations = new ArrayList<>();
     }
 
     public String getAmka() {
@@ -47,19 +43,4 @@ public class Doctor {
         this.surname = surname;
     }
 
-    public List<Timeslot> getTimeSlots() {
-        return timeSlots;
-    }
-
-    public void setTimeSlots(List<Timeslot> timeSlots) {
-        this.timeSlots = timeSlots;
-    }
-
-    public List<Vaccination> getVaccinations() {
-        return vaccinations;
-    }
-
-    public void setVaccinations(List<Vaccination> vaccinations) {
-        this.vaccinations = vaccinations;
-    }
 }

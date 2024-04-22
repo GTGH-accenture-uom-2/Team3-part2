@@ -111,4 +111,14 @@ public class ReservationService {
         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "This reservation is not found!");
     }
 
+    public Reservation getReservationByAmka(String amka,Long id){
+        for (Reservation reservation: reservations){
+            if (reservation.getInsured().getAmka().equals(amka) && reservation.getTimeslot().getId().equals(id)){
+                return reservation;
+            }
+        }
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                "Invalid amka or id");
+    }
+
 }
