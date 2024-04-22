@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -17,18 +18,25 @@ public class TimeslotsController {
 
     @GetMapping
     public List<Timeslot> getAllTimeslots (){
-
         return  timeslotService.getAllTimeslots();
     }
 
     @GetMapping("/oneTimeslot")
     public Timeslot getOneTimeslot(@RequestParam Long id){
-        for(Timeslot timeslot:timeslotService.getAllTimeslots()){
-            if(id == timeslot.getId()) {
-                return timeslot;
-            }
+        try {
+            return timeslotService.getOneTimeslot(id);
+        } catch (ResponseStatusException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Not found", e);
         }
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Not found");
+    }
+
+    @GetMapping("/getTimeslotByDate")
+    public List<Timeslot> getTimeslotByDate(@RequestParam LocalDate localdate){
+        try {
+            return timeslotService.getTimeslotByDate(localdate);
+        } catch (ResponseStatusException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Not found", e);
+        }
     }
 
     @PostMapping

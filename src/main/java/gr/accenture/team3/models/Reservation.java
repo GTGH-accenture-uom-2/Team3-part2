@@ -36,4 +36,5 @@ public class Reservation {
     public void setVaccinationDate(LocalDate vaccinationDate) {
         this.vaccinationDate = vaccinationDate;
     }
+
 }

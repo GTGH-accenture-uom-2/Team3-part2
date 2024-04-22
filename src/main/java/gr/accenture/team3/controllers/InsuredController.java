@@ -31,5 +31,4 @@ public class InsuredController {
         return insuredService.getInsureds();
     }
 
-
 }

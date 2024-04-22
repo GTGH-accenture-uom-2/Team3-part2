@@ -5,6 +5,7 @@ import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
+import gr.accenture.team3.dto.VaccinationDTO;
 import gr.accenture.team3.models.Vaccination;
 import gr.accenture.team3.services.VaccinationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,7 @@ public class VaccinationController {
     }
 
     @GetMapping("/status")
-    public Vaccination getVaccinationStatus(@RequestParam String amka){
+    public VaccinationDTO getVaccinationStatus(@RequestParam String amka){
         return vaccinationService.getVaccinationStatus(amka);
     }
     @GetMapping("/QR")
