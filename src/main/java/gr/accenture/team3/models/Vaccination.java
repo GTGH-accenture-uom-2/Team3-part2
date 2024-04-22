@@ -10,8 +10,8 @@ public class Vaccination  extends Reservation{
     public Vaccination (Insured insured, Doctor doctor, Timeslot timeslot, LocalDate vaccinationDate) {
         super(insured,timeslot,vaccinationDate);  //mporoume na kanoume extend reservation
         this.doctor = doctor;
-        expirationDate = vaccinationDate.plusYears(2);
-    }
+//        expirationDate = vaccinationDate.plusYears(2);
+   }
 
 //    public Insured getInsured() {
 //        return insured;

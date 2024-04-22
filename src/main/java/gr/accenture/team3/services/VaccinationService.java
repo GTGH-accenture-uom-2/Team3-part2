@@ -1,14 +1,13 @@
 package gr.accenture.team3.services;
 
-import gr.accenture.team3.models.Insured;
-import gr.accenture.team3.models.Timeslot;
-import gr.accenture.team3.models.Vaccination;
+import gr.accenture.team3.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,8 +21,6 @@ public class VaccinationService {
     ReservationService reservationService;
 
     List<Vaccination> vaccinations = new ArrayList<>();
-    Map<Insured, Timeslot> insuredTimeslotMap = new HashMap<>();
-
 
     public List<Vaccination> addVaccination(Vaccination vaccination) {
         vaccinations.add(vaccination);
@@ -41,22 +38,6 @@ public class VaccinationService {
 
 
 
-    public List<Vaccination> addVaccinations(List<Insured> insureds, List<Timeslot> timeslots) {
-        insureds = reservationService.getAllInsured(); //insured που εκλεισαν ραντεβου
-        timeslots = reservationService.getAllTimeslots(); //timeslots from reservation
-
-        for(int i = 0; i < insureds.size(); i++) {
-            insuredTimeslotMap.put(insureds.get(i), timeslots.get(i));
-        }
-
-        for(Map.Entry<Insured, Timeslot> entry : insuredTimeslotMap.entrySet()) {
-            Insured insured = entry.getKey();
-            Timeslot timeslot = entry.getValue();
-            vaccinations.add(new Vaccination(insured,"", timeslot,"","","",));
-        }
-
-        return vaccinations;
-    }
     public Vaccination getVaccinationStatus(String amka){
         for(Vaccination vaccination: vaccinations){
             if(vaccination.getInsured().equals(insuredService.getInsuredByAmka(amka))){
@@ -66,4 +47,35 @@ public class VaccinationService {
         throw new ResponseStatusException(HttpStatus.NOT_FOUND,
                 "This insured is not vaccinated!");
     }
+
+    public Vaccination declareVaccination(String amka,Long idTimeslot,LocalDate expDate){
+        Reservation res=reservationService.getReservationByAmka(amka,idTimeslot);
+        Vaccination vaccination=new Vaccination(res.getInsured(),res.getTimeslot().getDoctor(),
+                res.getTimeslot(),res.getTimeslot().getDate());
+        vaccination.setExpirationDate(expDate);
+        vaccinations.add(vaccination);
+
+        return vaccination;
+    }
+
+//    //!expdate?
+//    public String declareVaccinationAmkaInsured(String insuredAmka){
+//        List<Insured> insureds= reservationService.getAllInsured();
+//        for (Insured insured: insureds){
+//            if (insuredAmka == insured.getAmka()){
+//                return insuredAmka;
+//            }
+//        }
+//        return null;
+//    }
+//
+//    public Long declareVaccinationIdTimeslot(Long idTimeslot){
+//        List<Timeslot> timeslots=reservationService.getAllTimeslots();
+//        for (Timeslot timeslot:timeslots){
+//            if (timeslot.getId()==idTimeslot){
+//                return idTimeslot;
+//            }
+//        }
+//        return null;
+//    }
 }

@@ -22,10 +22,10 @@ public class DoctorController {
         return doctorService.addDoctor(doctor);
     }
 
-    @PutMapping
-    public Long TimeslotId(@RequestParam Long id){
-        return doctorService.insertTimeslotId(id);
-    }
+//    @PutMapping
+//    public Long TimeslotId(@RequestParam Long id){
+//        return doctorService.insertTimeslotId(id);
+//    }
 
 
 

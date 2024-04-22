@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -44,5 +45,12 @@ public class VaccinationController {
         MatrixToImageWriter.writeToStream(bitMatrix, "PNG", outputStream);
 
         return outputStream.toByteArray();
+    }
+
+    @PostMapping
+    public Vaccination declareVaccination(@RequestParam String amka,
+                                          @RequestParam Long id,
+                                          @RequestParam LocalDate expirationDate){
+       return vaccinationService.declareVaccination(amka,id,expirationDate);
     }
 }
