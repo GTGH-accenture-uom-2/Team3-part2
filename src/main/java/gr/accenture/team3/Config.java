@@ -28,7 +28,7 @@ public class Config {
 
             // Add a sample insured
             Insured sampleInsured1 = new Insured("123456789","12345678901","Nikos","Nikolaidis","12-34-90","example@example.gr");
-            Insured sampleInsured2 = new Insured("123456789","12345678901","Leonidas","Bozatzidis","12-34-90","example@example.gr");
+            Insured sampleInsured2 = new Insured("123456789","12345678902","Leonidas","Bozatzidis","12-34-90","example@example.gr");
             insuredService.addInsured(sampleInsured1);
             insuredService.addInsured(sampleInsured2);
 
@@ -37,18 +37,18 @@ public class Config {
             timeslotService.generateTimeslotsForPeriod(today, 30);
 
             // Assume the first timeslot of today for simplicity
-            Timeslot sampleTimeslot = timeslotService.getAllTimeslots().stream().findFirst().orElse(null);
-            if (sampleTimeslot != null) {
-                sampleTimeslot.setDoctor(sampleDoctor);  // Assign the doctor to the timeslot
-            }
+//            Timeslot sampleTimeslot = timeslotService.getAllTimeslots().stream().findFirst().orElse(null);
+//            if (sampleTimeslot != null) {
+//                sampleTimeslot.setDoctor(sampleDoctor);  // Assign the doctor to the timeslot
+//            }
 
             // Create a reservation for the sample insured, timeslot, and doctor
-            if (sampleTimeslot != null) {
-                Reservation newReservation = reservationService.addNewReservation(
-                        sampleInsured1.getAmka(),
-                        sampleTimeslot.getId(),
-                        sampleDoctor.getSurname());
-            }
+//            if (sampleTimeslot != null) {
+//                Reservation newReservation = reservationService.addNewReservation(
+//                        sampleInsured1.getAmka(),
+//                        sampleTimeslot.getId(),
+//                        sampleDoctor.getSurname());
+//            }
         };
     }
 }

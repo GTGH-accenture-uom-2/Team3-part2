@@ -34,9 +34,13 @@ public class ReservationController {
         return reservationService.getAvailableTimeslotforDay(localDate);
     }
 
-    @PostMapping("/createReservation")
+    @PostMapping("/create")
     public Reservation createAReservation(@RequestParam String amka, @RequestParam Long idTimeslot, @RequestParam String surname){
         return reservationService.addNewReservation(amka,idTimeslot,surname);
+    }
+    @PutMapping("/update")
+    public Reservation changeTimeslot(@RequestParam String amka, @RequestParam Long id){
+        return reservationService.changeReservation(amka,id);
     }
     @GetMapping("/getΑReservation")
     public Reservation getΑReservation(@RequestParam String amka){ return reservationService.getAReservation(amka);}

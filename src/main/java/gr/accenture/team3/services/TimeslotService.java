@@ -63,5 +63,13 @@ public class TimeslotService {
             date = date.plusDays(1);
         }
     }
+    public Timeslot getTimeslotById(Long id){
+        for(Timeslot timeslot: timeslots){
+            if(timeslot.getId().equals(id)){
+                return timeslot;
+            }
+        }
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The requested timeslot does not exist.");
+    }
 
 }
