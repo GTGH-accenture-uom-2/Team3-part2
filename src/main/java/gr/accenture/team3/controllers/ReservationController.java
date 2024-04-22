@@ -15,30 +15,30 @@ import java.util.List;
 @RestController
 @RequestMapping("/reservation")
 public class ReservationController {
+
     @Autowired
     ReservationService reservationService;
     @Autowired
     TimeslotService timeslotService;
 
-    @PostMapping("/add")
+   @PostMapping("/add")
    public List<Reservation> addReservation(@RequestBody  Reservation reservation){
        return reservationService.addReservation(reservation);
    }
-   @GetMapping("/all")
+    @GetMapping("/all")
     public List<Reservation> getReservation(){
         return reservationService.getReservations();
     }
-    @GetMapping("/searchTimeslots")
-    public List<Timeslot> getAvailableTimeslot(@RequestParam LocalDate localDate){
-
-        return reservationService.availableTimeslot(localDate);
+    @GetMapping("/getAvailableTimeslotforDay")
+    public List<Timeslot> getAvailableTimeslotforDay(@RequestParam LocalDate localDate){
+        return reservationService.getAvailableTimeslotforDay(localDate);
     }
 
     @PostMapping("/createReservation")
     public Reservation createAReservation(@RequestParam String amka, @RequestParam Long idTimeslot, @RequestParam String surname){
         return reservationService.addNewReservation(amka,idTimeslot,surname);
     }
-    @GetMapping("/createReservation")
-    public Reservation getNewReservation(@RequestParam String amka){ return reservationService.getAReservation(amka);}
+    @GetMapping("/getΑReservation")
+    public Reservation getΑReservation(@RequestParam String amka){ return reservationService.getAReservation(amka);}
 
 }

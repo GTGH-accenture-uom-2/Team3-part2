@@ -27,22 +27,30 @@ public class ReservationService {
     public List<Reservation> getReservations(){
         return reservations;
     }
-    public List<Timeslot> availableTimeslot(LocalDate localDate){
+    public List<Timeslot> getAvailableTimeslotforDay(LocalDate localDate) {
+        List<Timeslot> availableTimeslots = new ArrayList<>();
+        List<Timeslot> timeslotsByDate = timeslotService.getTimeslotByDate(localDate);
 
-        List<Timeslot> availableTimeslots=new ArrayList<>();
-        List<Timeslot> timeslotsByDate=timeslotService.getTimeslotByDate(localDate);
-        for(Reservation reservation: reservations){
-            for(Timeslot timeslot: timeslotsByDate){
-
-                if(!reservation.getTimeslot().equals(timeslot)){
-                availableTimeslots.add(timeslot);
+        // Check each timeslot to see if it is free (i.e., not reserved)
+        for (Timeslot timeslot : timeslotsByDate) {
+            boolean isReserved = false;
+            for (Reservation reservation : reservations) {
+                if (reservation.getTimeslot() != null && reservation.getTimeslot().equals(timeslot)) {
+                    isReserved = true;
+                    break; // This timeslot is reserved, break out of the inner loop
                 }
-                return availableTimeslots;
+            }
+            if (!isReserved) {
+                availableTimeslots.add(timeslot); // This timeslot is available, add to list
             }
         }
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND,
-                "No available timeslot on this date!");
+
+        if (availableTimeslots.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No available timeslots on this date");
+        }
+        return availableTimeslots;
     }
+
 
     public Reservation addNewReservation(String amka, Long id, String surname){
         for(Insured insured : insuredService.insureds){
