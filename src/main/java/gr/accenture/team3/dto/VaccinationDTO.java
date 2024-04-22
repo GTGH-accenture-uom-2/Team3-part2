@@ -12,6 +12,7 @@ public class VaccinationDTO {
     }
 
 
+
     public LocalDate getVaccinationDate() {
         return vaccinationDate;
     }
