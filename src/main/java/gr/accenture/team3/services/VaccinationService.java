@@ -1,5 +1,6 @@
 package gr.accenture.team3.services;
 
+import gr.accenture.team3.dto.VaccinationDTO;
 import gr.accenture.team3.models.Insured;
 import gr.accenture.team3.models.Vaccination;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,10 +32,11 @@ public class VaccinationService {
 //    }
 // }
 
-    public Vaccination getVaccinationStatus(String amka){
+
+    public VaccinationDTO getVaccinationStatus(String amka){
         for(Vaccination vaccination: vaccinations){
             if(vaccination.getInsured().equals(insuredService.getInsuredByAmka(amka))){
-                return vaccination;
+                return new VaccinationDTO(vaccination.getVaccinationDate());
             }
         }
         throw new ResponseStatusException(HttpStatus.NOT_FOUND,

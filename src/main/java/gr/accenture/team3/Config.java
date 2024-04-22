@@ -29,7 +29,7 @@ public class Config {
            reservationService.addReservation(
                     new Reservation(insuredService.getInsureds().get(0),null, LocalDate.of(2021,4,10)));
            vaccinationService.addVaccination(
-                    new Vaccination(null,null,null, LocalDate.of(2021,4,10)));
+                    new Vaccination(insuredService.getInsureds().get(0),null,null, LocalDate.of(2021,4,10)));
            doctorService.addDoctor(
                     new Doctor("27059500515", "Leonidas", "Bozatzidis", LocalDate.of(1996, 10, 15)));
 
