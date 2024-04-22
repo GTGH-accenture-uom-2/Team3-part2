@@ -22,33 +22,34 @@ public class Config {
     {
 
         return args -> {
-            // Add a sample doctor
-            Doctor sampleDoctor = new Doctor("27059500515", "Leonidas", "Bozatzidis", LocalDate.of(1996, 10, 15));
-            doctorService.addDoctor(sampleDoctor);
 
-            // Add a sample insured
-            Insured sampleInsured1 = new Insured("123456789","12345678901","Nikos","Nikolaidis","12-34-90","example@example.gr");
-            Insured sampleInsured2 = new Insured("123456789","12345678902","Leonidas","Bozatzidis","12-34-90","example@example.gr");
+            Doctor sampleDoctor1 = new Doctor("15108608516", "Giorgos", "Papadopoulos", LocalDate.of(1986, 10, 15));
+            Doctor sampleDoctor2 = new Doctor("11059019501", "Maria", "Nikolinakou", LocalDate.of(1990, 05, 11));
+
+            doctorService.addDoctor(sampleDoctor1);
+            doctorService.addDoctor(sampleDoctor2);
+
+            Insured sampleInsured1 = new Insured("160244981","27059500515","Leonidas","Bozatzidis","leonidas@gmail.com",LocalDate.of(1995,05,27));
+            Insured sampleInsured2 = new Insured("222134112","16069851985","Vasiliki","Kopetsidou","vasilikikoupe@gmail.com",LocalDate.of(1998,06,16));
+            Insured sampleInsured3 = new Insured("532952922","25019859151","Kiriaki","Diggelidou","kiriaki@gmail.com",LocalDate.of(1998,01,25));
+            Insured sampleInsured4 = new Insured("348838588","21069856514","Vasiliki","Karouta","vasilikikarouta@gmail.com",LocalDate.of(1998,06,21));
+            Insured sampleInsured5 = new Insured("348818588","22029512345","Nikos","Nikolaidis","Nikos@gmail.com",LocalDate.of(1995,02,22));
+
             insuredService.addInsured(sampleInsured1);
             insuredService.addInsured(sampleInsured2);
+            insuredService.addInsured(sampleInsured3);
+            insuredService.addInsured(sampleInsured4);
+            insuredService.addInsured(sampleInsured5);
 
-            // Generate timeslots for a period
             LocalDate today = LocalDate.now();
             timeslotService.generateTimeslotsForPeriod(today, 30);
 
-            // Assume the first timeslot of today for simplicity
-//            Timeslot sampleTimeslot = timeslotService.getAllTimeslots().stream().findFirst().orElse(null);
-//            if (sampleTimeslot != null) {
-//                sampleTimeslot.setDoctor(sampleDoctor);  // Assign the doctor to the timeslot
-//            }
+            Reservation newReservation1 = reservationService.addNewReservation(sampleInsured1.getAmka(),2204241000L,sampleDoctor1.getSurname());
+            Reservation newReservation2 = reservationService.addNewReservation(sampleInsured2.getAmka(),2204241030L,sampleDoctor2.getSurname());
+            Reservation newReservation3 = reservationService.addNewReservation(sampleInsured3.getAmka(),2204241100L,sampleDoctor1.getSurname());
+            Reservation newReservation4 = reservationService.addNewReservation(sampleInsured4.getAmka(),2404241000L,sampleDoctor1.getSurname());
 
-            // Create a reservation for the sample insured, timeslot, and doctor
-//            if (sampleTimeslot != null) {
-//                Reservation newReservation = reservationService.addNewReservation(
-//                        sampleInsured1.getAmka(),
-//                        sampleTimeslot.getId(),
-//                        sampleDoctor.getSurname());
-//            }
+
         };
     }
 }

@@ -13,6 +13,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ReservationService {
@@ -20,18 +21,35 @@ public class ReservationService {
     @Autowired InsuredService insuredService;
     @Autowired TimeslotService timeslotService;
     @Autowired DoctorService doctorService;
+
+    public List<Reservation> getReservations(int page, int size){
+        int start = page * size;
+        return reservations.stream()
+                .skip(start)
+                .limit(size)
+                .collect(Collectors.toList());
+    }
+
+    public List<Reservation> getReservationsForDay(LocalDate date) {
+        List<Reservation> reservationsForDay = new ArrayList<>();
+        for (Reservation reservation : reservations) {
+            if (reservation.getTimeslot().getDate().isEqual(date)) {
+                reservationsForDay.add(reservation);
+            }
+        }
+        return reservationsForDay;
+    }
+
     public List<Reservation> addReservation(Reservation reservation){
        reservations.add(reservation);
        return reservations;
     }
-    public List<Reservation> getReservations(){
-        return reservations;
-    }
+
     public List<Timeslot> getAvailableTimeslotforDay(LocalDate localDate) {
         List<Timeslot> availableTimeslots = new ArrayList<>();
         List<Timeslot> timeslotsByDate = timeslotService.getTimeslotByDate(localDate);
 
-        // Check each timeslot to see if it is free (i.e., not reserved)
+        // Check each timeslot to see if it is free
         for (Timeslot timeslot : timeslotsByDate) {
             boolean isReserved = false;
             for (Reservation reservation : reservations) {
@@ -56,7 +74,7 @@ public class ReservationService {
         Insured insured = insuredService.getInsuredByAmka(amka);
         for(Reservation reservation: reservations){
             if(reservation.getInsured().equals(insured)){
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "You can up one reservation!");
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "You can book only one reservation!");
             }
         }
         Timeslot timeslot = timeslotService.getTimeslotById(id);

@@ -17,8 +17,19 @@ public class DoctorController {
     public List<Doctor> getAllDoctors(){
         return doctorService.getAllDoctors();
     }
+
+    @GetMapping("/{amka}")
+    public Doctor getDoctorByAMKA(@PathVariable String amka) {
+        return doctorService.getDoctorByAMKA(amka);
+    }
+
     @PostMapping
     public List<Doctor> addDoctor(@RequestBody Doctor doctor){
         return doctorService.addDoctor(doctor);
+    }
+
+    @DeleteMapping("/{amka}")
+    public void deleteDoctorByAMKA(@PathVariable String amka) {
+        doctorService.deleteDoctorByAMKA(amka);
     }
 }
