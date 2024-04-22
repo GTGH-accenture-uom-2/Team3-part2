@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -35,6 +36,13 @@ public class VaccinationController {
     public VaccinationDTO getVaccinationStatus(@RequestParam String amka){
         return vaccinationService.getVaccinationStatus(amka);
     }
+    @GetMapping("/addByDoctor")
+    public List<Vaccination> addByDoctor(@RequestParam Long id,@RequestParam String amka,@RequestParam LocalDate expirationDate){
+
+        return vaccinationService.addByDoctor(id,amka,expirationDate);
+    }
+
+
     @GetMapping("/QR")
     public static byte[] generateQRCodeImage(String text, int width, int height) throws WriterException, IOException {
         QRCodeWriter qrCodeWriter = new QRCodeWriter();

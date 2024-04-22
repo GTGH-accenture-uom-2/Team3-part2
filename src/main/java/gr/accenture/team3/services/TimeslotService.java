@@ -1,5 +1,6 @@
 package gr.accenture.team3.services;
 
+import gr.accenture.team3.models.Insured;
 import gr.accenture.team3.models.Timeslot;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -38,6 +39,16 @@ public class TimeslotService {
                     "There are no timeslot!");
         return timeslotsByDate;
 
+    }
+    public Timeslot getTimeslotById(Long id){
+        for(Timeslot timeslot: timeslots){
+            if(timeslot.getId().equals(id)){
+                return timeslot;
+            }
+        }
+
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                "This id doesn't belong to any timeslot!");
     }
 
     public void generateTimeslotsForPeriod(LocalDate startDate, int days) {

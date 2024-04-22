@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +17,8 @@ import java.util.List;
 public class VaccinationService {
     @Autowired
     InsuredService insuredService;
+    @Autowired
+    TimeslotService timeslotService;
     List<Vaccination> vaccinations = new ArrayList<>();
 
     public List<Vaccination> addVaccination(Vaccination vaccination) {
@@ -42,4 +45,11 @@ public class VaccinationService {
         throw new ResponseStatusException(HttpStatus.NOT_FOUND,
                 "This insured is not vaccinated!");
     }
+
+    public List<Vaccination> addByDoctor(Long id, String amka, LocalDate expirationDate){
+
+        vaccinations.add(new Vaccination(insuredService.getInsuredByAmka(amka),timeslotService.getTimeslotById(id).getDoctor(),timeslotService.getTimeslotById(id),expirationDate.minusYears(2)));
+        return vaccinations;
+    }
+
 }
