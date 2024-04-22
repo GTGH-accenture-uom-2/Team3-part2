@@ -25,15 +25,19 @@ public class TimeslotService {
         timeslots.add(timeslot);
         return timeslots;
     }
-    public List<Timeslot> getTimeslotByDate(LocalDate localdate){
+    public List<Timeslot> getTimeslotByDate(LocalDate localdate) {
         List<Timeslot> timeslotsByDate=new ArrayList<>();
-        for(Timeslot timeslot: timeslots){
-            if(timeslot.getDate().equals(localdate)){
-                return timeslotsByDate;
+        for (Timeslot timeslot : timeslots) {
+            int x=timeslot.getDate().compareTo(localdate);
+            if (x==0) {
+                timeslotsByDate.add(timeslot);
             }
         }
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND,
-                "There are no timeslot!");
+        if(timeslotsByDate.isEmpty())
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                    "There are no timeslot!");
+        return timeslotsByDate;
+
     }
 
     public void generateTimeslotsForPeriod(LocalDate startDate, int days) {

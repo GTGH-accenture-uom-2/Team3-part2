@@ -26,8 +26,8 @@ public class Config {
 //                    new Timeslot(2,LocalDate.of(2024,4,10)));
            insuredService.addInsured(
                     new Insured("123456789","12345678901","Nikos","Nikolaidis","12-34-90","example@example.gr"));
-           reservationService.addReservation(
-                    new Reservation(insuredService.getInsureds().get(0),null, LocalDate.of(2021,4,10)));
+          //reservationService.addReservation(
+                   // new Reservation(insuredService.getInsureds().get(0),null, LocalDate.of(2021,4,10)));
            vaccinationService.addVaccination(
                     new Vaccination(insuredService.getInsureds().get(0),null,null, LocalDate.of(2021,4,10)));
            doctorService.addDoctor(

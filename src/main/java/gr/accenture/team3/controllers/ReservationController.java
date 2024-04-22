@@ -28,7 +28,7 @@ public class ReservationController {
     public List<Reservation> getReservation(){
         return reservationService.getReservations();
     }
-    @GetMapping("/searchTimeslots")
+    @GetMapping("/search")
     public List<Timeslot> getAvailableTimeslot(@RequestParam LocalDate localDate){
 
         return reservationService.availableTimeslot(localDate);

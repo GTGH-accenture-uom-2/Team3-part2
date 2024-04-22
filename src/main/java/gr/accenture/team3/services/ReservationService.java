@@ -17,6 +17,7 @@ import java.util.List;
 @Service
 public class ReservationService {
     List<Reservation> reservations=new ArrayList<>();
+    List<Timeslot> availableTimeslots=new ArrayList<>();
     @Autowired InsuredService insuredService;
     @Autowired TimeslotService timeslotService;
     @Autowired DoctorService doctorService;
@@ -28,20 +29,21 @@ public class ReservationService {
         return reservations;
     }
     public List<Timeslot> availableTimeslot(LocalDate localDate){
+        List<Timeslot> timeslotByDay=timeslotService.getTimeslotByDate(localDate);
+        if(reservations.isEmpty())
+            return timeslotByDay;
 
-        List<Timeslot> availableTimeslots=new ArrayList<>();
-        List<Timeslot> timeslotsByDate=timeslotService.getTimeslotByDate(localDate);
         for(Reservation reservation: reservations){
-            for(Timeslot timeslot: timeslotsByDate){
-
-                if(!reservation.getTimeslot().equals(timeslot)){
-                availableTimeslots.add(timeslot);
+           int x= reservation.getTimeslot().getDate().compareTo(localDate);
+                if((x==0)){
+                    timeslotByDay.remove(reservation.getTimeslot());
                 }
-                return availableTimeslots;
-            }
         }
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+           if(timeslotByDay.isEmpty())
+               throw new ResponseStatusException(HttpStatus.NOT_FOUND,
                 "No available timeslot on this date!");
+        return timeslotByDay;
+
     }
 
     public Reservation addNewReservation(String amka, Long id, String surname){
