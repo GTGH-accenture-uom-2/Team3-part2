@@ -13,13 +13,6 @@ public class Vaccination  extends Reservation{
         expirationDate = vaccinationDate.plusYears(2);
     }
 
-//    public Insured getInsured() {
-//        return insured;
-//    }
-//
-//    public void setInsured(Insured insured) {
-//        this.insured = insured;
-//    }
 
     public Doctor getDoctor() {
         return doctor;
@@ -29,13 +22,7 @@ public class Vaccination  extends Reservation{
         this.doctor = doctor;
     }
 
-//    public LocalDate getVaccinationDate() {
-//        return vaccinationDate;
-//    }
-//
-//    public void setVaccinationDate(LocalDate vaccinationDate) {
-//        this.vaccinationDate = vaccinationDate;
-//    }
+
 
     public LocalDate getExpirationDate() {
         return expirationDate;

@@ -36,11 +36,12 @@ public class VaccinationController {
     public VaccinationDTO getVaccinationStatus(@RequestParam String amka){
         return vaccinationService.getVaccinationStatus(amka);
     }
+    /*
     @GetMapping("/addByDoctor")
     public List<Vaccination> addByDoctor(@RequestParam Long id,@RequestParam String amka,@RequestParam LocalDate expirationDate){
 
         return vaccinationService.addByDoctor(id,amka,expirationDate);
-    }
+    } */
 
 
     @GetMapping("/QR")

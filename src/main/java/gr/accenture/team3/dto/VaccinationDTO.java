@@ -11,6 +11,7 @@ public class VaccinationDTO {
         expirationDate = vaccinationDate.plusYears(2);
     }
 
+
     public LocalDate getVaccinationDate() {
         return vaccinationDate;
     }

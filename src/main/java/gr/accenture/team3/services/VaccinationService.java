@@ -29,11 +29,6 @@ public class VaccinationService {
     public List<Vaccination> getVaccinations() {
         return vaccinations;
     }
-//    public List<Vaccination> addVaccinations(List<Insured> insureds,){ //kanonika edw thelei Reservation kai na pairnei orismata apo ekei
-//    for(Insured ins: insureds){
-//        vaccinations.add(new Vaccination(insureds(ins),))
-//    }
-// }
 
 
     public VaccinationDTO getVaccinationStatus(String amka){
@@ -46,10 +41,10 @@ public class VaccinationService {
                 "This insured is not vaccinated!");
     }
 
-    public List<Vaccination> addByDoctor(Long id, String amka, LocalDate expirationDate){
+   /* public List<Vaccination> addByDoctor(Long id, String amka, LocalDate expirationDate){
 
         vaccinations.add(new Vaccination(insuredService.getInsuredByAmka(amka),timeslotService.getTimeslotById(id).getDoctor(),timeslotService.getTimeslotById(id),expirationDate.minusYears(2)));
         return vaccinations;
-    }
+    } */
 
 }
