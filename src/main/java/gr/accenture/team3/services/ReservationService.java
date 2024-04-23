@@ -1,9 +1,6 @@
 package gr.accenture.team3.services;
 
-import gr.accenture.team3.models.Doctor;
-import gr.accenture.team3.models.Insured;
-import gr.accenture.team3.models.Reservation;
-import gr.accenture.team3.models.Timeslot;
+import gr.accenture.team3.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -21,6 +18,7 @@ public class ReservationService {
     @Autowired InsuredService insuredService;
     @Autowired TimeslotService timeslotService;
     @Autowired DoctorService doctorService;
+    @Autowired VaccinationCenterService vaccinationCenterService;
 
     public List<Reservation> getReservations(int page, int size){
         int start = page * size;
@@ -70,7 +68,15 @@ public class ReservationService {
     }
 
 
-    public Reservation addNewReservation(String amka, Long id, String surname){
+    public Reservation addNewReservation(String amka, Long id, String surname,Integer code){
+        if(code==null){
+            VaccinationCenter center = vaccinationCenterService.getVaccinationCenterByCode(1);
+            timeslotService.initializeTimeslots(center.getCode());
+        }else{
+            VaccinationCenter center = vaccinationCenterService.getVaccinationCenterByCode(code);
+            timeslotService.initializeTimeslots(center.getCode());
+        }
+
         Insured insured = insuredService.getInsuredByAmka(amka);
         for(Reservation reservation: reservations){
             if(reservation.getInsured().equals(insured)){

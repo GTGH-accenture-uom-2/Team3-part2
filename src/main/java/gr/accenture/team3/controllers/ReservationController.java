@@ -35,10 +35,9 @@ public class ReservationController {
     @GetMapping("/getΑReservation")
     public Reservation getΑReservation(@RequestParam String amka){ return reservationService.getAReservation(amka);}
 
-
     @PostMapping("/create")
-    public Reservation createAReservation(@RequestParam String amka, @RequestParam Long idTimeslot, @RequestParam String surname){
-        return reservationService.addNewReservation(amka,idTimeslot,surname);
+    public Reservation createAReservation(@RequestParam String amka, @RequestParam Long idTimeslot, @RequestParam String surname,@RequestParam (required=false) Integer code){
+        return reservationService.addNewReservation(amka,idTimeslot,surname,code);
     }
 
    @PostMapping("/add")

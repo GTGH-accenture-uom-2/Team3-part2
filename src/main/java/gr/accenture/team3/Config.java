@@ -18,7 +18,8 @@ public class Config {
             ReservationService reservationService,
             VaccinationService vaccinationService,
             DoctorService doctorService,
-            TimeslotService timeslotService)
+            TimeslotService timeslotService,
+            VaccinationCenterService vaccinationCenterService)
     {
 
         return args -> {
@@ -35,19 +36,24 @@ public class Config {
             Insured sampleInsured4 = new Insured("348838588","21069856514","Vasiliki","Karouta","vasilikikarouta@gmail.com",LocalDate.of(1998,06,21));
             Insured sampleInsured5 = new Insured("348818588","22029512345","Nikos","Nikolaidis","Nikos@gmail.com",LocalDate.of(1995,02,22));
 
+            Insured sampleInsured6 = new Insured("123456789","03069701567","Nikos","Nikolaidis","Nikos@gmail.com",LocalDate.of(1997,06,03));
+
             insuredService.addInsured(sampleInsured1);
             insuredService.addInsured(sampleInsured2);
             insuredService.addInsured(sampleInsured3);
             insuredService.addInsured(sampleInsured4);
             insuredService.addInsured(sampleInsured5);
+            insuredService.addInsured(sampleInsured6);
 
-            LocalDate today = LocalDate.now();
-            timeslotService.generateTimeslotsForPeriod(today, 30);
+            VaccinationCenter firstCenter = new VaccinationCenter(1,"Delfon 124");
+            VaccinationCenter secondCenter = new VaccinationCenter(2, "Konstantinoupoleos 49");
+            vaccinationCenterService.addVaccinationCenter(firstCenter);
+            vaccinationCenterService.addVaccinationCenter(secondCenter);
 
-            Reservation newReservation1 = reservationService.addNewReservation(sampleInsured1.getAmka(),2204241000L,sampleDoctor1.getSurname());
-            Reservation newReservation2 = reservationService.addNewReservation(sampleInsured2.getAmka(),2204241030L,sampleDoctor2.getSurname());
-            Reservation newReservation3 = reservationService.addNewReservation(sampleInsured3.getAmka(),2204241100L,sampleDoctor1.getSurname());
-            Reservation newReservation4 = reservationService.addNewReservation(sampleInsured4.getAmka(),2404241000L,sampleDoctor1.getSurname());
+            Reservation newReservation1 = reservationService.addNewReservation(sampleInsured1.getAmka(),2704241000L,sampleDoctor1.getSurname(),1);
+            Reservation newReservation2 = reservationService.addNewReservation(sampleInsured2.getAmka(),2704241030L,sampleDoctor2.getSurname(),1);
+            Reservation newReservation3 = reservationService.addNewReservation(sampleInsured3.getAmka(),2704241100L,sampleDoctor1.getSurname(),1);
+            Reservation newReservation4 = reservationService.addNewReservation(sampleInsured4.getAmka(),2804241000L,sampleDoctor1.getSurname(),1);
 
 
         };

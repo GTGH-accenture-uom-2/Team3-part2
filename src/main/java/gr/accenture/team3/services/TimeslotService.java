@@ -1,6 +1,7 @@
 package gr.accenture.team3.services;
 
 import gr.accenture.team3.models.Timeslot;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -13,9 +14,13 @@ import java.util.List;
 
 @Service
 public class TimeslotService {
+    List<Timeslot> timeslots ;
+    @Autowired
+    VaccinationCenterService vaccinationCenterService;
 
-
-    List<Timeslot> timeslots = new ArrayList<>();
+    public void initializeTimeslots(Integer code) {
+        timeslots = vaccinationCenterService.getAllTimeslotsPerVacCenter(code);
+    }
 
     public List<Timeslot> getAllTimeslots() {
         return timeslots;
@@ -47,22 +52,6 @@ public class TimeslotService {
         return filteredTimeslots;
     }
 
-    public void generateTimeslotsForPeriod(LocalDate startDate, int days) {
-        DateTimeFormatter idFormatter = DateTimeFormatter.ofPattern("ddMMyy");
-        LocalDate date = startDate;
-        for (int i = 0; i < days; i++) {
-            String baseId = date.format(idFormatter);
-            LocalTime time = LocalTime.of(10, 0);
-            for (int j = 0; j < 10; j++) { // 10 timeslots per day
-                String timeId = String.format("%02d%02d", time.getHour(), time.getMinute());
-                Long id = Long.parseLong(baseId + timeId);
-                Timeslot timeslot = new Timeslot(id, date, time, time.plusMinutes(30), null);
-                timeslots.add(timeslot);
-                time = time.plusMinutes(30);
-            }
-            date = date.plusDays(1);
-        }
-    }
     public Timeslot getTimeslotById(Long id){
         for(Timeslot timeslot: timeslots){
             if(timeslot.getId().equals(id)){
