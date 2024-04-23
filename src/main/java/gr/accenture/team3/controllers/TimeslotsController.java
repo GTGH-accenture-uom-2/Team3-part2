@@ -17,8 +17,8 @@ public class TimeslotsController {
     TimeslotService timeslotService;
 
     @GetMapping
-    public List<Timeslot> getAllTimeslots (){
-        return  timeslotService.getAllTimeslots();
+    public List<Timeslot> getAllTimeslots (@RequestParam (required=false) Integer code){
+        return  timeslotService.getAllTimeslots(code);
     }
 
     @GetMapping("/oneTimeslot")

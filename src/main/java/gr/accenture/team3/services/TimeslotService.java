@@ -1,6 +1,8 @@
 package gr.accenture.team3.services;
 
+import gr.accenture.team3.models.Doctor;
 import gr.accenture.team3.models.Timeslot;
+import gr.accenture.team3.models.VaccinationCenter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -22,7 +24,9 @@ public class TimeslotService {
         timeslots = vaccinationCenterService.getAllTimeslotsPerVacCenter(code);
     }
 
-    public List<Timeslot> getAllTimeslots() {
+    public List<Timeslot> getAllTimeslots(Integer code) {
+        if (code!=null)
+            timeslots = vaccinationCenterService.getAllTimeslotsPerVacCenter(code);
         return timeslots;
     }
 
@@ -60,5 +64,8 @@ public class TimeslotService {
         }
         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The requested timeslot does not exist.");
     }
+
+
+
 
 }

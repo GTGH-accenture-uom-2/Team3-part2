@@ -50,10 +50,10 @@ public class Config {
             vaccinationCenterService.addVaccinationCenter(firstCenter);
             vaccinationCenterService.addVaccinationCenter(secondCenter);
 
-            Reservation newReservation1 = reservationService.addNewReservation(sampleInsured1.getAmka(),2704241000L,sampleDoctor1.getSurname(),1);
-            Reservation newReservation2 = reservationService.addNewReservation(sampleInsured2.getAmka(),2704241030L,sampleDoctor2.getSurname(),1);
-            Reservation newReservation3 = reservationService.addNewReservation(sampleInsured3.getAmka(),2704241100L,sampleDoctor1.getSurname(),1);
-            Reservation newReservation4 = reservationService.addNewReservation(sampleInsured4.getAmka(),2804241000L,sampleDoctor1.getSurname(),1);
+            Reservation newReservation1 = reservationService.addNewReservation(sampleInsured1.getAmka(),2304241000L,sampleDoctor1.getSurname(),1);
+            Reservation newReservation2 = reservationService.addNewReservation(sampleInsured2.getAmka(),2304241030L,sampleDoctor2.getSurname(),2);
+            Reservation newReservation3 = reservationService.addNewReservation(sampleInsured3.getAmka(),2304241100L,sampleDoctor1.getSurname(),1);
+            Reservation newReservation4 = reservationService.addNewReservation(sampleInsured4.getAmka(),2304241130L,sampleDoctor1.getSurname(),1);
 
 
         };
