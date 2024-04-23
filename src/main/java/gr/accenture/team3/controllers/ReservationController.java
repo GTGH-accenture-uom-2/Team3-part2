@@ -45,9 +45,9 @@ public class ReservationController {
        return reservationService.addReservation(reservation);
    }
 
-    @GetMapping("/getAvailableTimeslotforDay")
-    public List<Timeslot> getAvailableTimeslotforDay(@RequestParam LocalDate localDate){
-        return reservationService.getAvailableTimeslotforDay(localDate);
+    @GetMapping("/search")
+    public List<Timeslot> getAvailableTimeslotforDay(@RequestParam LocalDate localDate,@RequestParam Integer code){
+        return reservationService.getAvailableTimeslotforDay(localDate,code);
     }
 
     @PutMapping("/update")

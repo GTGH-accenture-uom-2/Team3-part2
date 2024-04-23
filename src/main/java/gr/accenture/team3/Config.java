@@ -35,8 +35,9 @@ public class Config {
             Insured sampleInsured3 = new Insured("532952922","25019859151","Kiriaki","Diggelidou","kiriaki@gmail.com",LocalDate.of(1998,01,25));
             Insured sampleInsured4 = new Insured("348838588","21069856514","Vasiliki","Karouta","vasilikikarouta@gmail.com",LocalDate.of(1998,06,21));
             Insured sampleInsured5 = new Insured("348818588","22029512345","Nikos","Nikolaidis","Nikos@gmail.com",LocalDate.of(1995,02,22));
-
-            Insured sampleInsured6 = new Insured("123456789","03069701567","Nikos","Nikolaidis","Nikos@gmail.com",LocalDate.of(1997,06,03));
+            Insured sampleInsured6 = new Insured("123456789","03069701567","Marios","Nikolaidis","marios@gmail.com",LocalDate.of(1997,06,03));
+            Insured sampleInsured7 = new Insured("358838588","21029856514","Maria","Papadopoulou","maria@gmail.com",LocalDate.of(1998,02,21));
+            Insured sampleInsured8 = new Insured("348818555","22119512345","Eleni","Nikolaidou","eleni@gmail.com",LocalDate.of(1995,11,22));
 
             insuredService.addInsured(sampleInsured1);
             insuredService.addInsured(sampleInsured2);
@@ -44,6 +45,8 @@ public class Config {
             insuredService.addInsured(sampleInsured4);
             insuredService.addInsured(sampleInsured5);
             insuredService.addInsured(sampleInsured6);
+            insuredService.addInsured(sampleInsured7);
+            insuredService.addInsured(sampleInsured8);
 
             VaccinationCenter firstCenter = new VaccinationCenter(1,"Delfon 124");
             VaccinationCenter secondCenter = new VaccinationCenter(2, "Konstantinoupoleos 49");
@@ -54,6 +57,10 @@ public class Config {
             Reservation newReservation2 = reservationService.addNewReservation(sampleInsured2.getAmka(),2704241030L,sampleDoctor2.getSurname(),1);
             Reservation newReservation3 = reservationService.addNewReservation(sampleInsured3.getAmka(),2704241100L,sampleDoctor1.getSurname(),1);
             Reservation newReservation4 = reservationService.addNewReservation(sampleInsured4.getAmka(),2804241000L,sampleDoctor1.getSurname(),1);
+            Reservation newReservation5 = reservationService.addNewReservation(sampleInsured5.getAmka(),2704241000L,sampleDoctor1.getSurname(),2);
+            Reservation newReservation6 = reservationService.addNewReservation(sampleInsured6.getAmka(),2804241030L,sampleDoctor2.getSurname(),2);
+            Reservation newReservation7 = reservationService.addNewReservation(sampleInsured7.getAmka(),2804241100L,sampleDoctor1.getSurname(),2);
+            Reservation newReservation8 = reservationService.addNewReservation(sampleInsured8.getAmka(),2904241000L,sampleDoctor1.getSurname(),2);
 
 
         };

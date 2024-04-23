@@ -43,29 +43,24 @@ public class ReservationService {
        return reservations;
     }
 
-    public List<Timeslot> getAvailableTimeslotforDay(LocalDate localDate) {
-        List<Timeslot> availableTimeslots = new ArrayList<>();
-        List<Timeslot> timeslotsByDate = timeslotService.getTimeslotByDate(localDate);
+    public List<Timeslot> getAvailableTimeslotforDay(LocalDate localDate,Integer code) {
+            List<Timeslot> timeslotsByDay=timeslotService.getTimeslotByDate(localDate);
+            List<Timeslot> timeslotsByVacCenter=vaccinationCenterService.getAllTimeslotsPerVacCenter(code);
+            if(reservations.isEmpty())
+                return timeslotService.getTimeslotsByDayAndVacCenter(timeslotsByVacCenter,localDate);
 
-        // Check each timeslot to see if it is free
-        for (Timeslot timeslot : timeslotsByDate) {
-            boolean isReserved = false;
-            for (Reservation reservation : reservations) {
-                if (reservation.getTimeslot() != null && reservation.getTimeslot().equals(timeslot)) {
-                    isReserved = true;
-                    break; // This timeslot is reserved, break out of the inner loop
+            for(Reservation reservation: reservations){
+                int x= reservation.getTimeslot().getDate().compareTo(localDate);
+                if((x==0)){
+                    timeslotsByDay.remove(reservation.getTimeslot());
                 }
             }
-            if (!isReserved) {
-                availableTimeslots.add(timeslot); // This timeslot is available, add to list
-            }
-        }
+            if(timeslotsByDay.isEmpty())
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                        "No available timeslot on this date!");
+            return timeslotService.getTimeslotsByDayAndVacCenter(timeslotsByVacCenter,localDate);
 
-        if (availableTimeslots.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No available timeslots on this date");
         }
-        return availableTimeslots;
-    }
 
 
     public Reservation addNewReservation(String amka, Long id, String surname,Integer code){

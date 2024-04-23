@@ -47,7 +47,7 @@ public class VaccinationController {
         return outputStream.toByteArray();
     }
 
-    @PostMapping
+    @PostMapping("/addByDoctor")
     public Vaccination declareVaccination(@RequestParam String amka,
                                           @RequestParam Long id,
                                           @RequestParam LocalDate expirationDate){
