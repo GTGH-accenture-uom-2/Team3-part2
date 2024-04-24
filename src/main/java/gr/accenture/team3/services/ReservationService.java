@@ -82,7 +82,7 @@ public class ReservationService {
         Doctor doctor = doctorService.getDoctorBySurname(surname);
         if(timeslot.getDoctor()==null){
             timeslot.setDoctor(doctor);
-            Reservation reservation = new Reservation(insured,timeslot,timeslot.getDate(),code);
+            Reservation reservation = new Reservation(insured,timeslot,timeslot.getDate());
             reservations.add(reservation);
             return reservation;
         }
@@ -114,7 +114,7 @@ public class ReservationService {
         oldReservationTimeslot.setDoctor(null);
 
         //create a new reservation and delete the old one from the list reservations
-        Reservation changedReservation = new Reservation(insured,newTimeslot,newTimeslot.getDate(),reservation.getCode());
+        Reservation changedReservation = new Reservation(insured,newTimeslot,newTimeslot.getDate());
         reservations.add(changedReservation);
         reservations.remove(reservation);
         return changedReservation;

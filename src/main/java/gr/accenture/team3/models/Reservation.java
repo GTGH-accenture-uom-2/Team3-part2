@@ -6,22 +6,15 @@ public class Reservation {
     private Insured insured;
     private Timeslot timeslot;
     private LocalDate vaccinationDate;
-    private Integer code;
 
-    public Reservation(Insured insured, Timeslot timeslot, LocalDate vaccinationDate,Integer code) {
+
+
+    public Reservation(Insured insured, Timeslot timeslot, LocalDate vaccinationDate) {
         this.insured = insured;
         this.timeslot = timeslot;
         this.vaccinationDate = vaccinationDate;
-        this.code=code;
     }
 
-    public Integer getCode() {
-        return code;
-    }
-
-    public void setCode(Integer code) {
-        this.code = code;
-    }
 
     public Insured getInsured() {
         return insured;
