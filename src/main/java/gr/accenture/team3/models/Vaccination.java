@@ -48,4 +48,13 @@ public class Vaccination {
     public void setExpirationDate(LocalDate expirationDate) {
         this.expirationDate = expirationDate;
     }
+
+    @Override
+    public String toString() {
+        return "Vaccination{" +
+                "Insured name =" + getInsured().getName() + " "+ getInsured().getSurname() +
+                ", vaccination date=" + getVaccinationDate() +
+                ", expiration date=" + expirationDate +
+                '}';
+    }
 }
