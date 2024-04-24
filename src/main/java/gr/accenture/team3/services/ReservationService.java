@@ -44,10 +44,11 @@ public class ReservationService {
     }
 
     public List<Timeslot> getAvailableTimeslotforDay(LocalDate localDate,Integer code) {
-            List<Timeslot> timeslotsByDay=timeslotService.getTimeslotByDate(localDate);
+
             List<Timeslot> timeslotsByVacCenter=vaccinationCenterService.getAllTimeslotsPerVacCenter(code);
+            List<Timeslot> timeslotsByDay=timeslotService.getTimeslotsByDayAndVacCenter(timeslotsByVacCenter,localDate);
             if(reservations.isEmpty())
-                return timeslotService.getTimeslotsByDayAndVacCenter(timeslotsByVacCenter,localDate);
+                return timeslotsByDay;
 
             for(Reservation reservation: reservations){
                 int x= reservation.getTimeslot().getDate().compareTo(localDate);
