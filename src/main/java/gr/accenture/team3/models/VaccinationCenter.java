@@ -41,5 +41,20 @@ public class VaccinationCenter {
         this.timeslots = timeslots;
     }
 
-    
+    public void generateTimeslotsForPeriod(LocalDate startDate, int days) {
+        DateTimeFormatter idFormatter = DateTimeFormatter.ofPattern("ddMMyy");
+        LocalDate date = startDate;
+        for (int i = 0; i < days; i++) {
+            String baseId = date.format(idFormatter);
+            LocalTime time = LocalTime.of(10, 0);
+            for (int j = 0; j < 10; j++) { // 10 timeslots per day
+                String timeId = String.format("%02d%02d", time.getHour(), time.getMinute());
+                Long id = Long.parseLong(baseId + timeId);
+                Timeslot timeslot = new Timeslot(id, date, time, time.plusMinutes(30), null);
+                timeslots.add(timeslot);
+                time = time.plusMinutes(30);
+            }
+            date = date.plusDays(1);
+        }
+    }
 }
