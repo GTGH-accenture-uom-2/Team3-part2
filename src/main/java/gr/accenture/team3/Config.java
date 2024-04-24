@@ -62,6 +62,13 @@ public class Config {
             Reservation newReservation7 = reservationService.addNewReservation(sampleInsured7.getAmka(),2804241100L,sampleDoctor1.getSurname(),2);
             Reservation newReservation8 = reservationService.addNewReservation(sampleInsured8.getAmka(),2904241000L,sampleDoctor1.getSurname(),2);
 
+            Vaccination vaccination1 = new Vaccination(insuredService.getInsuredByAmka(sampleInsured3.getAmka()),sampleDoctor1,timeslotService.getTimeslotById(2704241100L),timeslotService.getTimeslotById(2704241100L).getDate());
+            Vaccination vaccination2 = new Vaccination(insuredService.getInsuredByAmka(sampleInsured4.getAmka()),sampleDoctor1,timeslotService.getTimeslotById(2804241000L),timeslotService.getTimeslotById(2704241100L).getDate());
+            Vaccination vaccination3 = new Vaccination(insuredService.getInsuredByAmka(sampleInsured5.getAmka()),sampleDoctor2,timeslotService.getTimeslotById(2704241000L),timeslotService.getTimeslotById(2704241100L).getDate());
+            Vaccination vaccination4 = new Vaccination(insuredService.getInsuredByAmka(sampleInsured6.getAmka()),sampleDoctor2,timeslotService.getTimeslotById(2804241030L),timeslotService.getTimeslotById(2704241100L).getDate());
+            Vaccination vaccination5 = new Vaccination(insuredService.getInsuredByAmka(sampleInsured7.getAmka()),sampleDoctor2,timeslotService.getTimeslotById(2804241100L),timeslotService.getTimeslotById(2704241100L).getDate());
+
+
 
         };
     }

@@ -52,15 +52,16 @@ public class TimeslotService {
         return filteredTimeslots;
     }
     public List<Timeslot> getTimeslotsByDayAndVacCenter(List<Timeslot> timeslotsByVacCenter ,LocalDate localDate){
+        List<Timeslot> timeslotByDayAndVacCenter=new ArrayList<>();
         for (Timeslot timeslot : timeslotsByVacCenter) {
             if (timeslot.getDate().equals(localDate)) {
-                timeslotsByVacCenter.add(timeslot);
+                timeslotByDayAndVacCenter.add(timeslot);
             }
         }
-        if (timeslotsByVacCenter.isEmpty()) {
+        if (timeslotByDayAndVacCenter.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No timeslots available on this date");
         }
-        return timeslotsByVacCenter;
+        return timeslotByDayAndVacCenter;
     }
 
     public Timeslot getTimeslotById(Long id){

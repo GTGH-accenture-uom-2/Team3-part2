@@ -58,7 +58,7 @@ public class ReservationService {
             if(timeslotsByDay.isEmpty())
                 throw new ResponseStatusException(HttpStatus.NOT_FOUND,
                         "No available timeslot on this date!");
-            return timeslotService.getTimeslotsByDayAndVacCenter(timeslotsByVacCenter,localDate);
+            return timeslotsByDay;
 
         }
 
@@ -82,7 +82,7 @@ public class ReservationService {
         Doctor doctor = doctorService.getDoctorBySurname(surname);
         if(timeslot.getDoctor()==null){
             timeslot.setDoctor(doctor);
-            Reservation reservation = new Reservation(insured,timeslot,timeslot.getDate());
+            Reservation reservation = new Reservation(insured,timeslot,timeslot.getDate(),code);
             reservations.add(reservation);
             return reservation;
         }
@@ -114,7 +114,7 @@ public class ReservationService {
         oldReservationTimeslot.setDoctor(null);
 
         //create a new reservation and delete the old one from the list reservations
-        Reservation changedReservation = new Reservation(insured,newTimeslot,newTimeslot.getDate());
+        Reservation changedReservation = new Reservation(insured,newTimeslot,newTimeslot.getDate(),reservation.getCode());
         reservations.add(changedReservation);
         reservations.remove(reservation);
         return changedReservation;
