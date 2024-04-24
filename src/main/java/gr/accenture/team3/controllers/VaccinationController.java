@@ -47,10 +47,10 @@ public class VaccinationController {
         return outputStream.toByteArray();
     }
 
-    @PostMapping("/addByDoctor")
-    public Vaccination declareVaccination(@RequestParam String amka,
-                                          @RequestParam Long id,
-                                          @RequestParam LocalDate expirationDate){
+    @PostMapping("/addByDoctor/amka/{amka}/id/{id}/expirationDate/{expirationDate}")
+    public Vaccination declareVaccination(@PathVariable("amka") String amka,
+                                          @PathVariable("id") Long id,
+                                          @PathVariable("expirationDate") LocalDate expirationDate){
         return vaccinationService.declareVaccination(amka,id,expirationDate);
     }
 }

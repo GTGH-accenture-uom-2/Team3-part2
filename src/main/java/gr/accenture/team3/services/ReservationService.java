@@ -65,12 +65,14 @@ public class ReservationService {
 
 
     public Reservation addNewReservation(String amka, Long id, String surname,Integer code){
+        Integer centerCode = 1;
         if(code==null){
             VaccinationCenter center = vaccinationCenterService.getVaccinationCenterByCode(1);
             timeslotService.initializeTimeslots(center.getCode());
         }else{
             VaccinationCenter center = vaccinationCenterService.getVaccinationCenterByCode(code);
             timeslotService.initializeTimeslots(center.getCode());
+            centerCode = code;
         }
 
         Insured insured = insuredService.getInsuredByAmka(amka);
@@ -81,7 +83,7 @@ public class ReservationService {
         }
         Timeslot timeslot = timeslotService.getTimeslotById(id);
         Doctor doctor = doctorService.getDoctorBySurname(surname);
-        if(timeslot.getDoctor()==null){
+        if(timeslot.getDoctor()==null && checkAvailabilityOfTheDoctor(centerCode,doctor)){
             timeslot.setDoctor(doctor);
             Reservation reservation = new Reservation(insured,timeslot,timeslot.getDate());
             reservations.add(reservation);
@@ -139,6 +141,20 @@ public class ReservationService {
         }
         throw new ResponseStatusException(HttpStatus.NOT_FOUND,
                 "Invalid amka or id");
+    }
+    public Boolean checkAvailabilityOfTheDoctor(Integer code, Doctor doctor) {
+        for (VaccinationCenter vaccinationCenter : vaccinationCenterService.vaccinationCenters) {
+            if (!vaccinationCenter.getCode().equals(code)) {
+                List<Timeslot> otherCenterTimeslots = vaccinationCenter.getTimeslots();
+                for (Timeslot centerTimeslot : otherCenterTimeslots) {
+                    Doctor timeslotDoctor = centerTimeslot.getDoctor();
+                    if (timeslotDoctor != null && timeslotDoctor.equals(doctor)) {
+                        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The requested doctor is not available at this center.");
+                    }
+                }
+            }
+        }
+        return true;
     }
 
 }
