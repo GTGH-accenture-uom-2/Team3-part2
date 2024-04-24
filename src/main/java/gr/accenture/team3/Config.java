@@ -62,7 +62,7 @@ public class Config {
             Reservation newReservation5 = reservationService.addNewReservation(sampleInsured5.getAmka(),2904241000L,sampleDoctor2.getSurname(),2);
             Reservation newReservation6 = reservationService.addNewReservation(sampleInsured6.getAmka(),2904241030L,sampleDoctor2.getSurname(),2);
             Reservation newReservation7 = reservationService.addNewReservation(sampleInsured7.getAmka(),2904241100L,sampleDoctor2.getSurname(),2);
-            Reservation newReservation8 = reservationService.addNewReservation(sampleInsured8.getAmka(),2904241000L,sampleDoctor2.getSurname(),2);
+            Reservation newReservation8 = reservationService.addNewReservation(sampleInsured8.getAmka(),2904241130L,sampleDoctor2.getSurname(),2);
 
             Vaccination vaccination1 = new Vaccination(insuredService.getInsuredByAmka(sampleInsured3.getAmka()),sampleDoctor1,timeslotService.getTimeslotById(2704241100L),timeslotService.getTimeslotById(2704241100L).getDate());
             Vaccination vaccination2 = new Vaccination(insuredService.getInsuredByAmka(sampleInsured4.getAmka()),sampleDoctor1,timeslotService.getTimeslotById(2804241000L),timeslotService.getTimeslotById(2704241100L).getDate());
