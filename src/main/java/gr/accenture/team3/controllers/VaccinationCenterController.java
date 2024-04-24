@@ -1,6 +1,7 @@
 package gr.accenture.team3.controllers;
 
 import gr.accenture.team3.models.Reservation;
+import gr.accenture.team3.models.Timeslot;
 import gr.accenture.team3.models.Vaccination;
 import gr.accenture.team3.models.VaccinationCenter;
 import gr.accenture.team3.services.ReservationService;
@@ -24,5 +25,10 @@ public class VaccinationCenterController {
     @GetMapping("/all")
     public List<VaccinationCenter> getVaccinationCenters(){
         return vaccinationCenterService.getVaccinationCenters();
+    }
+
+    @GetMapping("/timeslots")
+    public List<Timeslot> getAllTimeslotPerVacCenter(@RequestParam Integer code){
+        return vaccinationCenterService.getAllTimeslotsPerVacCenter(code);
     }
 }

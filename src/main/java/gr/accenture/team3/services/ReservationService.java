@@ -1,9 +1,6 @@
 package gr.accenture.team3.services;
 
-import gr.accenture.team3.models.Doctor;
-import gr.accenture.team3.models.Insured;
-import gr.accenture.team3.models.Reservation;
-import gr.accenture.team3.models.Timeslot;
+import gr.accenture.team3.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -21,6 +18,7 @@ public class ReservationService {
     @Autowired InsuredService insuredService;
     @Autowired TimeslotService timeslotService;
     @Autowired DoctorService doctorService;
+    @Autowired VaccinationCenterService vaccinationCenterService;
 
     public List<Reservation> getReservations(int page, int size){
         int start = page * size;
@@ -45,32 +43,35 @@ public class ReservationService {
        return reservations;
     }
 
-    public List<Timeslot> getAvailableTimeslotforDay(LocalDate localDate) {
-        List<Timeslot> availableTimeslots = new ArrayList<>();
-        List<Timeslot> timeslotsByDate = timeslotService.getTimeslotByDate(localDate);
+    public List<Timeslot> getAvailableTimeslotforDay(LocalDate localDate,Integer code) {
+            List<Timeslot> timeslotsByDay=timeslotService.getTimeslotByDate(localDate);
+            List<Timeslot> timeslotsByVacCenter=vaccinationCenterService.getAllTimeslotsPerVacCenter(code);
+            if(reservations.isEmpty())
+                return timeslotService.getTimeslotsByDayAndVacCenter(timeslotsByVacCenter,localDate);
 
-        // Check each timeslot to see if it is free
-        for (Timeslot timeslot : timeslotsByDate) {
-            boolean isReserved = false;
-            for (Reservation reservation : reservations) {
-                if (reservation.getTimeslot() != null && reservation.getTimeslot().equals(timeslot)) {
-                    isReserved = true;
-                    break; // This timeslot is reserved, break out of the inner loop
+            for(Reservation reservation: reservations){
+                int x= reservation.getTimeslot().getDate().compareTo(localDate);
+                if((x==0)){
+                    timeslotsByDay.remove(reservation.getTimeslot());
                 }
             }
-            if (!isReserved) {
-                availableTimeslots.add(timeslot); // This timeslot is available, add to list
-            }
+            if(timeslotsByDay.isEmpty())
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                        "No available timeslot on this date!");
+            return timeslotsByDay;
+
         }
 
-        if (availableTimeslots.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No available timeslots on this date");
+
+    public Reservation addNewReservation(String amka, Long id, String surname,Integer code){
+        if(code==null){
+            VaccinationCenter center = vaccinationCenterService.getVaccinationCenterByCode(1);
+            timeslotService.initializeTimeslots(center.getCode());
+        }else{
+            VaccinationCenter center = vaccinationCenterService.getVaccinationCenterByCode(code);
+            timeslotService.initializeTimeslots(center.getCode());
         }
-        return availableTimeslots;
-    }
 
-
-    public Reservation addNewReservation(String amka, Long id, String surname){
         Insured insured = insuredService.getInsuredByAmka(amka);
         for(Reservation reservation: reservations){
             if(reservation.getInsured().equals(insured)){

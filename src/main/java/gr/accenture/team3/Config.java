@@ -18,7 +18,8 @@ public class Config {
             ReservationService reservationService,
             VaccinationService vaccinationService,
             DoctorService doctorService,
-            TimeslotService timeslotService)
+            TimeslotService timeslotService,
+            VaccinationCenterService vaccinationCenterService)
     {
 
         return args -> {
@@ -34,20 +35,39 @@ public class Config {
             Insured sampleInsured3 = new Insured("532952922","25019859151","Kiriaki","Diggelidou","kiriaki@gmail.com",LocalDate.of(1998,01,25));
             Insured sampleInsured4 = new Insured("348838588","21069856514","Vasiliki","Karouta","vasilikikarouta@gmail.com",LocalDate.of(1998,06,21));
             Insured sampleInsured5 = new Insured("348818588","22029512345","Nikos","Nikolaidis","Nikos@gmail.com",LocalDate.of(1995,02,22));
+            Insured sampleInsured6 = new Insured("123456789","03069701567","Marios","Nikolaidis","marios@gmail.com",LocalDate.of(1997,06,03));
+            Insured sampleInsured7 = new Insured("358838588","21029856514","Maria","Papadopoulou","maria@gmail.com",LocalDate.of(1998,02,21));
+            Insured sampleInsured8 = new Insured("348818555","22119512345","Eleni","Nikolaidou","eleni@gmail.com",LocalDate.of(1995,11,22));
 
             insuredService.addInsured(sampleInsured1);
             insuredService.addInsured(sampleInsured2);
             insuredService.addInsured(sampleInsured3);
             insuredService.addInsured(sampleInsured4);
             insuredService.addInsured(sampleInsured5);
+            insuredService.addInsured(sampleInsured6);
+            insuredService.addInsured(sampleInsured7);
+            insuredService.addInsured(sampleInsured8);
 
-            LocalDate today = LocalDate.now();
-            timeslotService.generateTimeslotsForPeriod(today, 30);
+            VaccinationCenter firstCenter = new VaccinationCenter(1,"Delfon 124");
+            VaccinationCenter secondCenter = new VaccinationCenter(2, "Konstantinoupoleos 49");
+            vaccinationCenterService.addVaccinationCenter(firstCenter);
+            vaccinationCenterService.addVaccinationCenter(secondCenter);
 
-            Reservation newReservation1 = reservationService.addNewReservation(sampleInsured1.getAmka(),2204241000L,sampleDoctor1.getSurname());
-            Reservation newReservation2 = reservationService.addNewReservation(sampleInsured2.getAmka(),2204241030L,sampleDoctor2.getSurname());
-            Reservation newReservation3 = reservationService.addNewReservation(sampleInsured3.getAmka(),2204241100L,sampleDoctor1.getSurname());
-            Reservation newReservation4 = reservationService.addNewReservation(sampleInsured4.getAmka(),2404241000L,sampleDoctor1.getSurname());
+            Reservation newReservation1 = reservationService.addNewReservation(sampleInsured1.getAmka(),2704241000L,sampleDoctor1.getSurname(),1);
+            Reservation newReservation2 = reservationService.addNewReservation(sampleInsured2.getAmka(),2704241030L,sampleDoctor2.getSurname(),1);
+            Reservation newReservation3 = reservationService.addNewReservation(sampleInsured3.getAmka(),2704241100L,sampleDoctor1.getSurname(),1);
+            Reservation newReservation4 = reservationService.addNewReservation(sampleInsured4.getAmka(),2804241000L,sampleDoctor1.getSurname(),1);
+            Reservation newReservation5 = reservationService.addNewReservation(sampleInsured5.getAmka(),2704241000L,sampleDoctor1.getSurname(),2);
+            Reservation newReservation6 = reservationService.addNewReservation(sampleInsured6.getAmka(),2804241030L,sampleDoctor2.getSurname(),2);
+            Reservation newReservation7 = reservationService.addNewReservation(sampleInsured7.getAmka(),2804241100L,sampleDoctor1.getSurname(),2);
+            Reservation newReservation8 = reservationService.addNewReservation(sampleInsured8.getAmka(),2904241000L,sampleDoctor1.getSurname(),2);
+
+            Vaccination vaccination1 = new Vaccination(insuredService.getInsuredByAmka(sampleInsured3.getAmka()),sampleDoctor1,timeslotService.getTimeslotById(2704241100L),timeslotService.getTimeslotById(2704241100L).getDate());
+            Vaccination vaccination2 = new Vaccination(insuredService.getInsuredByAmka(sampleInsured4.getAmka()),sampleDoctor1,timeslotService.getTimeslotById(2804241000L),timeslotService.getTimeslotById(2704241100L).getDate());
+            Vaccination vaccination3 = new Vaccination(insuredService.getInsuredByAmka(sampleInsured5.getAmka()),sampleDoctor2,timeslotService.getTimeslotById(2704241000L),timeslotService.getTimeslotById(2704241100L).getDate());
+            Vaccination vaccination4 = new Vaccination(insuredService.getInsuredByAmka(sampleInsured6.getAmka()),sampleDoctor2,timeslotService.getTimeslotById(2804241030L),timeslotService.getTimeslotById(2704241100L).getDate());
+            Vaccination vaccination5 = new Vaccination(insuredService.getInsuredByAmka(sampleInsured7.getAmka()),sampleDoctor2,timeslotService.getTimeslotById(2804241100L),timeslotService.getTimeslotById(2704241100L).getDate());
+
 
 
         };

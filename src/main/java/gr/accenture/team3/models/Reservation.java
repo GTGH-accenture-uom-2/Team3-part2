@@ -7,11 +7,14 @@ public class Reservation {
     private Timeslot timeslot;
     private LocalDate vaccinationDate;
 
+
+
     public Reservation(Insured insured, Timeslot timeslot, LocalDate vaccinationDate) {
         this.insured = insured;
         this.timeslot = timeslot;
         this.vaccinationDate = vaccinationDate;
     }
+
 
     public Insured getInsured() {
         return insured;
