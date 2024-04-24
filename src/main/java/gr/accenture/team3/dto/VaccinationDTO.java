@@ -1,8 +1,11 @@
 package gr.accenture.team3.dto;
 
+import gr.accenture.team3.models.Insured;
+
 import java.time.LocalDate;
 
 public class VaccinationDTO {
+    private Insured insured;
     private LocalDate vaccinationDate;
     private LocalDate expirationDate;
 
@@ -26,4 +29,21 @@ public class VaccinationDTO {
     public void setExpirationDate(LocalDate expirationDate) {
         this.expirationDate = expirationDate;
     }
+
+    public Insured getInsured() {
+        return insured;
+    }
+
+    public void setInsured(Insured insured) {
+        this.insured = insured;
+    }
+
+    @Override
+    public String toString() {
+        return "Insured: " +
+                "vaccinationDate=" + vaccinationDate +
+                ", expirationDate=" + expirationDate +
+                '}';
+    }
 }
+
