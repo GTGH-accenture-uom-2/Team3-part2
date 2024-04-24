@@ -44,7 +44,7 @@ public class DoctorService {
         }
     }
 
-    public void deleteDoctorByAMKA(String amka) {
+    public List<Doctor> deleteDoctorByAMKA(String amka) {
         Doctor doctorTodelete = null;
         for (Doctor doctor : doctors) {
             if (doctor.getAmka().equals(amka)) {
@@ -54,6 +54,7 @@ public class DoctorService {
         }
         if (doctorTodelete != null) {
             doctors.remove(doctorTodelete);
+            return doctors;
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Doctor not found with the specified AMKA.");
         }

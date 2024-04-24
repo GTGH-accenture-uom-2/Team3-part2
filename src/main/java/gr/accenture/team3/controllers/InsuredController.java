@@ -15,7 +15,7 @@ public class InsuredController {
     @Autowired
     InsuredService insuredService;
 
-    @GetMapping("/all")
+    @GetMapping
     public List<Insured> getInsureds() {
         return insuredService.getInsureds();
     }
@@ -30,9 +30,9 @@ public class InsuredController {
         return insuredService.addInsured(insured);
     }
 
-    @DeleteMapping("/{afm}") //example http://localhost:8080/insured/123456789
-    public HttpStatus deleteInsured(@PathVariable String afm) {
-        insuredService.deleteInsured(afm);
+    @DeleteMapping("/{amka}")
+    public HttpStatus deleteInsured(@PathVariable String amka) {
+        insuredService.deleteInsured(amka);
         return HttpStatus.OK;
     }
 

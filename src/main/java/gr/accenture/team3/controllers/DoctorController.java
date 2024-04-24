@@ -29,7 +29,7 @@ public class DoctorController {
     }
 
     @DeleteMapping("/{amka}")
-    public void deleteDoctorByAMKA(@PathVariable String amka) {
-        doctorService.deleteDoctorByAMKA(amka);
+    public List<Doctor> deleteDoctorByAMKA(@PathVariable String amka) {
+        return doctorService.deleteDoctorByAMKA(amka);
     }
 }

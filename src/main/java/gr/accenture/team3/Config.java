@@ -52,6 +52,7 @@ public class Config {
 
             VaccinationCenter firstCenter = new VaccinationCenter(1,"Delfon 124");
             VaccinationCenter secondCenter = new VaccinationCenter(2, "Konstantinoupoleos 49");
+
             vaccinationCenterService.addVaccinationCenter(firstCenter);
             vaccinationCenterService.addVaccinationCenter(secondCenter);
 

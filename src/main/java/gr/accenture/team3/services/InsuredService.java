@@ -44,16 +44,16 @@ public class InsuredService {
         return insureds;
     }
 
-    public void deleteInsured(String afm) {
+    public void deleteInsured(String amka) {
         Iterator<Insured> iterator = insureds.iterator();
         while (iterator.hasNext()) {
             Insured insured = iterator.next();
-            if (insured.getAfm().equals(afm)) {
+            if (insured.getAmka().equals(amka)) {
                 iterator.remove();
                 return;
             }
         }
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Insured with this AFM not found.");
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Insured with this AMKA not found.");
     }
 
 }
