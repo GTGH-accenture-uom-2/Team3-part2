@@ -39,6 +39,7 @@ public class Config {
             Insured sampleInsured7 = new Insured("358838588","21029856514","Maria","Papadopoulou","maria@gmail.com",LocalDate.of(1998,02,21));
             Insured sampleInsured8 = new Insured("348818555","22119512345","Eleni","Nikolaidou","eleni@gmail.com",LocalDate.of(1995,11,22));
             Insured sampleInsured9 = new Insured("348818577","12034512345","Maria","Papadopoulou","papadopoulou@gmail.com",LocalDate.of(1945,03,12));
+            Insured sampleInsured10 = new Insured("348818578","03069712345","Vaso","Papadopoulou","papadopoulou@gmail.com",LocalDate.of(1997,06,03));
 
             insuredService.addInsured(sampleInsured1);
             insuredService.addInsured(sampleInsured2);
@@ -49,6 +50,7 @@ public class Config {
             insuredService.addInsured(sampleInsured7);
             insuredService.addInsured(sampleInsured8);
             insuredService.addInsured(sampleInsured9);
+            insuredService.addInsured(sampleInsured10);
 
             VaccinationCenter firstCenter = new VaccinationCenter(1,"Delfon 124");
             VaccinationCenter secondCenter = new VaccinationCenter(2, "Konstantinoupoleos 49");

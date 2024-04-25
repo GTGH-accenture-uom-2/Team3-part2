@@ -9,7 +9,8 @@ public class VaccinationDTO {
     private LocalDate vaccinationDate;
     private LocalDate expirationDate;
 
-    public VaccinationDTO(LocalDate vaccinationDate) {
+    public VaccinationDTO(LocalDate vaccinationDate, Insured insured) {
+        this.insured= insured;
         this.vaccinationDate = vaccinationDate;
         expirationDate = vaccinationDate.plusYears(2);
     }

@@ -59,7 +59,7 @@ public class VaccinationService {
     public VaccinationDTO getVaccinationStatus(String amka){
         for(Vaccination vaccination: vaccinations){
             if(vaccination.getInsured().equals(insuredService.getInsuredByAmka(amka))){
-                return new VaccinationDTO(vaccination.getVaccinationDate());
+                return new VaccinationDTO(vaccination.getVaccinationDate(),insuredService.getInsuredByAmka(amka));
             }
         }
         throw new ResponseStatusException(HttpStatus.NOT_FOUND,

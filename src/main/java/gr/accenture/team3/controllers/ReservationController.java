@@ -54,5 +54,9 @@ public class ReservationController {
     public Reservation changeTimeslot(@RequestParam String amka, @RequestParam Long id){
         return reservationService.changeReservation(amka,id);
     }
+    @GetMapping()
+    public List<Timeslot> getAllTimeslotsPerMonth(@RequestParam Integer code){
+        return reservationService.getAllTimeslotsPerMonth(code);
+    }
 
 }

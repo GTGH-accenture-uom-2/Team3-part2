@@ -48,8 +48,8 @@ public class VaccinationController {
 
         @GetMapping(value = "/QR", produces = MediaType.IMAGE_PNG_VALUE)
         public byte[] generateQRCodeImage(@RequestParam("amka") String amka,
-                                          @RequestParam("width") int width,
-                                          @RequestParam("height") int height) throws WriterException, IOException {
+                                          @RequestParam(defaultValue = "300") int width,
+                                          @RequestParam(defaultValue = "200") int height) throws WriterException, IOException {
             String vaccinationStatus = vaccinationService.getVaccinationSInsured(amka).toString();
             QRCodeWriter qrCodeWriter = new QRCodeWriter();
             BitMatrix bitMatrix = qrCodeWriter.encode(vaccinationStatus,BarcodeFormat.QR_CODE, width, height);

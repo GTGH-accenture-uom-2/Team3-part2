@@ -63,6 +63,28 @@ public class ReservationService {
 
         }
 
+    public List<Timeslot> getAllTimeslotsPerMonth(Integer code) {
+        List<Timeslot> availableTimeslots = new ArrayList<>(); // This will be our list of available timeslots
+        List<Timeslot> timeslotsByVacCenter = vaccinationCenterService.getAllTimeslotsPerVacCenter(code); // Get all timeslots for the vaccination center
+
+        // Initialize a copy of all timeslots in the vaccination center which will be modified to exclude reserved timeslots
+        availableTimeslots.addAll(timeslotsByVacCenter);
+
+        // Iterate over all reservations
+        for (Reservation reservation : reservations) {
+            // Iterate over all timeslots in our list of available timeslots
+            for (Timeslot timeslot : new ArrayList<>(availableTimeslots)) { // Create a new ArrayList to avoid ConcurrentModificationException
+                // If the timeslot is reserved, remove it from the list of available timeslots
+                if (reservation.getTimeslot().equals(timeslot)) {
+                    availableTimeslots.remove(timeslot);
+                }
+            }
+        }
+
+        // After all reserved timeslots have been removed, return the list of available timeslots
+        return availableTimeslots;
+    }
+
 
     public Reservation addNewReservation(String amka, Long id, String surname,Integer code){
         Integer centerCode = 1;
