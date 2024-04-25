@@ -1,6 +1,7 @@
 package gr.accenture.team3.controllers;
 
 import gr.accenture.team3.models.*;
+import gr.accenture.team3.services.PDFService;
 import gr.accenture.team3.services.ReservationService;
 import gr.accenture.team3.services.TimeslotService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +22,8 @@ public class ReservationController {
     ReservationService reservationService;
     @Autowired
     TimeslotService timeslotService;
+    @Autowired
+    PDFService pdfService;
 
     @GetMapping("/all")
     public List<Reservation> getReservation(@RequestParam(defaultValue = "0") int page,@RequestParam(defaultValue = "2") int size){
@@ -57,6 +61,19 @@ public class ReservationController {
     @GetMapping()
     public List<Timeslot> getAllTimeslotsPerMonth(@RequestParam Integer code){
         return reservationService.getAllTimeslotsPerMonth(code);
+    }
+
+    @GetMapping("/generatePdfForDoctorDay")
+    public String generatePdfForDoctorDay(@RequestParam String doctorAmka, @RequestParam String date, @RequestParam String path) {
+        LocalDate parsedDate = LocalDate.parse(date);
+        List<Reservation> reservations = reservationService.getReservationsForDoctorAndDay(doctorAmka, parsedDate);
+
+        try {
+            pdfService.createAndSavePDF(reservations, path);
+            return "PDF generated successfully at: " + path;
+        } catch (IOException e) {
+            return "Failed to generate PDF: " + e.getMessage();
+        }
     }
 
 }

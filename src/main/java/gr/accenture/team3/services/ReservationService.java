@@ -179,4 +179,22 @@ public class ReservationService {
         return true;
     }
 
+    public List<Reservation> getReservationsForDoctorAndDay(String doctorAmka, LocalDate date) {
+        Doctor doctor = doctorService.getDoctorByAMKA(doctorAmka);
+        if (doctor == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Doctor not found");
+        }
+
+        List<Reservation> filteredReservations = new ArrayList<>();
+        for (Reservation reservation : reservations) {
+            if (reservation.getTimeslot() != null &&
+                    reservation.getTimeslot().getDate().isEqual(date) &&
+                    reservation.getTimeslot().getDoctor() != null &&
+                    reservation.getTimeslot().getDoctor().getAmka().equals(doctorAmka)) {
+                filteredReservations.add(reservation);
+            }
+        }
+
+        return filteredReservations;
+    }
 }
