@@ -45,10 +45,6 @@ public class Vaccination {
         return expirationDate;
     }
 
-    public void setExpirationDate(LocalDate expirationDate) {
-        this.expirationDate = expirationDate;
-    }
-
     @Override
     public String toString() {
         return "Vaccination{" +
@@ -57,4 +53,9 @@ public class Vaccination {
                 ", expiration date=" + expirationDate +
                 '}';
     }
+
+    public void setExpirationDate(LocalDate expirationDate) {
+        this.expirationDate = expirationDate;
+    }
+
 }

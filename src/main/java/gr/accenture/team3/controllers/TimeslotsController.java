@@ -21,15 +21,6 @@ public class TimeslotsController {
         return  timeslotService.getAllTimeslots();
     }
 
-    @GetMapping("/oneTimeslot")
-    public Timeslot getOneTimeslot(@RequestParam Long id){
-        try {
-            return timeslotService.getOneTimeslot(id);
-        } catch (ResponseStatusException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Not found", e);
-        }
-    }
-
     @GetMapping("/getTimeslotByDate")
     public List<Timeslot> getTimeslotByDate(@RequestParam LocalDate localdate){
         try {
@@ -39,6 +30,14 @@ public class TimeslotsController {
         }
     }
 
+    @GetMapping("/oneTimeslot")
+    public Timeslot getOneTimeslot(@RequestParam Long id){
+        try {
+            return timeslotService.getOneTimeslot(id);
+        } catch (ResponseStatusException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Not found", e);
+        }
+    }
     @PostMapping
     public List<Timeslot> addTimeslot(@RequestBody Timeslot timeslot){
         return timeslotService.addTimeslot(timeslot);

@@ -46,20 +46,20 @@ public class VaccinationService {
         return vaccination;
     }
 
-    public Vaccination getVaccinationSInsured(String amka){
+    public VaccinationDTO getVaccinationStatus(String amka){
         for(Vaccination vaccination: vaccinations){
             if(vaccination.getInsured().equals(insuredService.getInsuredByAmka(amka))){
-                return vaccination;
+                return new VaccinationDTO(vaccination.getVaccinationDate(),insuredService.getInsuredByAmka(amka));
             }
         }
         throw new ResponseStatusException(HttpStatus.NOT_FOUND,
                 "This insured is not vaccinated!");
     }
 
-    public VaccinationDTO getVaccinationStatus(String amka){
+    public Vaccination getVaccinationsInsured(String amka){
         for(Vaccination vaccination: vaccinations){
             if(vaccination.getInsured().equals(insuredService.getInsuredByAmka(amka))){
-                return new VaccinationDTO(vaccination.getVaccinationDate(),insuredService.getInsuredByAmka(amka));
+                return vaccination;
             }
         }
         throw new ResponseStatusException(HttpStatus.NOT_FOUND,
